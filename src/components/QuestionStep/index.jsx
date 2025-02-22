@@ -15,9 +15,10 @@ import {
    ButtonContainer,
    Button,
    Layout,
-   MotionImgContainer,
+   //    MotionImgContainer,
 } from '@styles/selectionStyle';
 import { useState } from 'react';
+import image1 from '@assets/images/image1.jpg';
 
 const QuestionStep = ({ questions }) => {
    const dispatch = useDispatch();
@@ -38,18 +39,21 @@ const QuestionStep = ({ questions }) => {
          <Layout>
             {/* ✅ Animated Image Section */}
             <ImageContainer>
-               <AnimatePresence mode="wait">
+               <img src={image1} alt="Oxygen Concentrator" />
+            </ImageContainer>
+            <ImageContainer>
+               {/* <AnimatePresence mode="wait">
                   <MotionImgContainer
                      key={questions[step]?.image}
                      src={questions[step]?.image}
                      alt="Question related"
-                     initial={{ opacity: 0, x: direction * 100 }}
-                     animate={{ opacity: 1, x: 0 }}
-                     exit={{ opacity: 0, x: -direction * 100 }}
-                     transition={{ type: 'tween', duration: 0.5 }}
+                     //  initial={{ opacity: 0, x: direction * 100 }}
+                     //  animate={{ opacity: 1, x: 0 }}
+                     //  exit={{ opacity: 0, x: -direction * 100 }}
+                     //  transition={{ type: 'tween', duration: 0.5 }}
                      //  style={{ width: '100%', borderRadius: '10px' }}
                   />
-               </AnimatePresence>
+               </AnimatePresence> */}
             </ImageContainer>
 
             {/* ✅ Animated Question Section */}

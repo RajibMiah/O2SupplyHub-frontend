@@ -14,7 +14,7 @@ export const Container = styled.div`
       padding: 0.5rem;
    }
    @media (min-width: 1400px) {
-      padding: 4rem 8rem; /* Large Screens (Desktops & Above) */
+      padding: 3rem 8rem; /* Large Screens (Desktops & Above) */
    }
 `;
 
@@ -100,8 +100,7 @@ export const StepLine = styled.div`
 export const ContentContainer = styled.div`
    //    display: flex;
    //    justify-content: space-around;
-   gap: 5rem;
-   margin: 5rem;
+   margin: 3.5rem 5rem;
    @media (max-width: 768px) {
       display: flex;
       flex-direction: column;
@@ -249,11 +248,11 @@ export const Button = styled.button`
 /* ====================== ✅ Added Result Page Styles ====================== */
 export const ResultContainer = styled.div`
    text-align: center;
-   padding: 4rem;
+   padding: 2rem 4rem;
    background: #fff;
    border-radius: 12px;
    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-   max-width: 800px;
+   //    max-width: 800px;
    margin: auto;
 `;
 

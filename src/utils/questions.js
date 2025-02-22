@@ -9,9 +9,9 @@ export const questions = [
       id: 1,
       question: 'What is the number of Oxygen Exam/Comfort outlets?',
       options: [
-         { label: '1 Outlet (5 lpm)', value: '1' },
-         { label: '2 Outlets (10 lpm)', value: '2' },
-         { label: '3 Outlets (15 lpm)', value: '3' },
+         { label: '1. Outlet (5 lpm)', value: '1' },
+         { label: '2. Outlets (10 lpm)', value: '2' },
+         { label: '3. Outlets (15 lpm)', value: '3' },
       ],
       image: images[Math.floor(Math.random() * images.length)],
    },

@@ -14,7 +14,7 @@ export const Container = styled.div`
       padding: 0.5rem;
    }
    @media (min-width: 1400px) {
-      padding: 8rem; /* Large Screens (Desktops & Above) */
+      padding: 4rem 8rem; /* Large Screens (Desktops & Above) */
    }
 `;
 
@@ -122,7 +122,7 @@ export const ImageContainer = styled.div``;
 export const MotionImgContainer = styled(motion.img)`
    width: '100%';
    borderradius: '10px';
-   @media (min-width: 768px) {
+   @media (max-width: 768px) {
       width: 40%;
    }
 `;

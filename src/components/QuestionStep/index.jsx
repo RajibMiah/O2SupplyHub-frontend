@@ -11,10 +11,11 @@ import {
    OptionText,
    CustomRadio,
    HiddenRadio,
-   OtherOption,
+   //    OtherOption,
    ButtonContainer,
    Button,
    Layout,
+   MotionImgContainer,
 } from '@styles/selectionStyle';
 import { useState } from 'react';
 
@@ -38,7 +39,7 @@ const QuestionStep = ({ questions }) => {
             {/* ✅ Animated Image Section */}
             <ImageContainer>
                <AnimatePresence mode="wait">
-                  <motion.img
+                  <MotionImgContainer
                      key={questions[step]?.image}
                      src={questions[step]?.image}
                      alt="Question related"
@@ -46,7 +47,7 @@ const QuestionStep = ({ questions }) => {
                      animate={{ opacity: 1, x: 0 }}
                      exit={{ opacity: 0, x: -direction * 100 }}
                      transition={{ type: 'tween', duration: 0.5 }}
-                     style={{ width: '100%', borderRadius: '10px' }}
+                     //  style={{ width: '100%', borderRadius: '10px' }}
                   />
                </AnimatePresence>
             </ImageContainer>
@@ -83,7 +84,7 @@ const QuestionStep = ({ questions }) => {
                      </Options>
 
                      {/* ✅ "Other Option" Input */}
-                     <OtherOption>
+                     {/* <OtherOption>
                         <HiddenRadio
                            type="radio"
                            name="option"
@@ -93,7 +94,7 @@ const QuestionStep = ({ questions }) => {
                         />
                         <CustomRadio checked={selectedOptions[step] === 'Other Option'} />
                         <OptionText>Other Option</OptionText>
-                     </OtherOption>
+                     </OtherOption> */}
                   </motion.div>
                </AnimatePresence>
             </QuestionContainer>

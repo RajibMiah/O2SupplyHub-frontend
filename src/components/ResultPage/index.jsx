@@ -11,7 +11,7 @@ import {
    QuantitySelector,
 } from '@styles/selectionStyle';
 
-import image1 from '@assets/images/ON2-Photoroom_1.jpg';
+import image1 from '@assets/images/image1.jpg';
 
 const ResultPage = () => {
    const dispatch = useDispatch();

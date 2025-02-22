@@ -1,0 +1,132 @@
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoginModal, setSignupModal } from '@redux/slices/uiSlice';
+import { motion } from 'framer-motion';
+import {
+   ModalOverlay,
+   ModalContainer,
+   CloseButton,
+   Input,
+   Label,
+   CheckboxContainer,
+   Button,
+   FooterText,
+   PasswordContainer,
+   TogglePassword,
+} from './styles';
+
+const SignupModal = () => {
+   const dispatch = useDispatch();
+   const { signupModal } = useSelector((state) => state.ui);
+   const [formData, setFormData] = useState({
+      fullName: '',
+      email: '',
+      phoneNumber: '',
+      password: '',
+      agreeTerms: false,
+   });
+   const [showPassword, setShowPassword] = useState(false);
+
+   const handleChange = (e) => {
+      const { name, value, type, checked } = e.target;
+      setFormData((prev) => ({
+         ...prev,
+         [name]: type === 'checkbox' ? checked : value,
+      }));
+   };
+
+   const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log('Signup Data:', formData);
+      dispatch(setSignupModal(false)); // Close modal after submit
+   };
+   const handleRedirect = () => {
+      dispatch(setSignupModal(false));
+      dispatch(setLoginModal(true));
+   };
+   return (
+      signupModal && (
+         <ModalOverlay>
+            <motion.div
+               initial={{ opacity: 0, y: -50 }}
+               animate={{ opacity: 1, y: 0 }}
+               exit={{ opacity: 0, y: -50 }}
+               transition={{ duration: 0.3 }}
+            >
+               <ModalContainer>
+                  <CloseButton onClick={() => dispatch(setSignupModal(false))}>×</CloseButton>
+                  <h2>Sign Up</h2>
+                  <form onSubmit={handleSubmit}>
+                     <Label>Full Name</Label>
+                     <Input
+                        type="text"
+                        name="fullName"
+                        placeholder="Enter your full name"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        required
+                     />
+
+                     <Label>Email</Label>
+                     <Input
+                        type="email"
+                        name="email"
+                        placeholder="Enter email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                     />
+
+                     <Label>Phone Number</Label>
+                     <Input
+                        type="tel"
+                        name="phoneNumber"
+                        placeholder="Enter phone number"
+                        value={formData.phoneNumber}
+                        onChange={handleChange}
+                        required
+                     />
+
+                     <Label>Password</Label>
+                     <PasswordContainer>
+                        <Input
+                           type={showPassword ? 'text' : 'password'}
+                           name="password"
+                           placeholder="Enter password"
+                           value={formData.password}
+                           onChange={handleChange}
+                           required
+                        />
+                        <TogglePassword onClick={() => setShowPassword(!showPassword)}>
+                           {showPassword ? '👁️' : '👁️‍🗨️'}
+                        </TogglePassword>
+                     </PasswordContainer>
+
+                     <CheckboxContainer>
+                        <input
+                           type="checkbox"
+                           name="agreeTerms"
+                           checked={formData.agreeTerms}
+                           onChange={handleChange}
+                           required
+                        />
+                        <span>I agree to Terms of Service and Privacy Policy</span>
+                     </CheckboxContainer>
+
+                     <Button type="submit">Sign up</Button>
+                  </form>
+
+                  <FooterText>
+                     Already have an account?{' '}
+                     <span style={{ cursor: 'pointer' }} onClick={handleRedirect}>
+                        Log in
+                     </span>
+                  </FooterText>
+               </ModalContainer>
+            </motion.div>
+         </ModalOverlay>
+      )
+   );
+};
+
+export default SignupModal;

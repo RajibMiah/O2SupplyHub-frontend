@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import authReducer from '@redux/slices/authSlice';
 import selectionReducer from '@redux/slices/selectionSlice';
+import uiReducer from '@redux/slices/uiSlice';
 import {
    persistStore,
    persistReducer,
@@ -13,23 +14,26 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // Local storage
 
-// Persist Configuration
+// Persist Configuration (Only for auth)
 const persistConfig = {
    key: 'auth',
    storage,
-   //  blacklist: ['selection'],
+   whitelist: ['auth'], // Persist only auth state
 };
 
-const rootRecuders = combineReducers(authReducer, selectionReducer);
+// Combine Reducers Correctly
+const rootReducer = combineReducers({
+   auth: authReducer, // Persisted Reducer
+   selection: selectionReducer, // Non-Persisted Reducer
+   ui: uiReducer, // Non-Persisted Reducer
+});
+
 // Wrap the auth reducer with persistReducer
-const persistedAuthReducer = persistReducer(persistConfig, rootRecuders);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Configure Store
 export const store = configureStore({
-   reducer: {
-      auth: persistedAuthReducer,
-      selection: selectionReducer,
-   },
+   reducer: persistedReducer,
    middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
          serializableCheck: {

@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import { store, persistor } from '@redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import ThemeProviderWrapper from '@/context/ThemeContext'; // Import ThemeProvider
+import LoginModal from '@/components/LoginModel';
+import SignupModal from '@/components/SignupModel';
 
 import App from './App';
 import Header from '@components/Header';
@@ -17,6 +19,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                <BrowserRouter>
                   <Header />
                   <App />
+                  <LoginModal />
+                  <SignupModal />
                </BrowserRouter>
             </ThemeProviderWrapper>
          </PersistGate>

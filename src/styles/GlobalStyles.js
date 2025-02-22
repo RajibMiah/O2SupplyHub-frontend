@@ -10,7 +10,7 @@ const GlobalStyles = createGlobalStyle`
 
   /* Set Default Styles */
   body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: ${({ theme }) => theme.bodyBackground};
     color: ${({ theme }) => theme.textColor};
     transition: all 0.3s ease-in-out;
@@ -24,15 +24,16 @@ const GlobalStyles = createGlobalStyle`
   }
 
   /* Button Styles */
-  button {
-    padding: 10px 15px;
+button {
+    font-weight: 500;
+    font-size: 14px;
     border: none;
     cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
     background-color: ${({ theme }) => theme.primary};
     color: ${({ theme }) => theme.buttonText};
-    transition: background-color 0.3s ease;
+    padding: 10px 20px;
+    border-radius: 6px;
   }
 
   button:hover {

@@ -17,16 +17,33 @@ export const Subtitle = styled.p`
    padding: 8px;
 `;
 
+export const StepsContainer = styled.div`
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   padding: 10px;
+
+   @media (min-width: 1536px) {
+      /* 2XL Screens */
+      width: 90%;
+   }
+`;
+
 export const Steps = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
+   width: 100%;
+   margin: 0 auto;
+   flex-wrap: wrap;
+   margin: 0 auto;
    margin: 20px 0;
 `;
 
 export const StepWrapper = styled.div`
    display: flex;
    align-items: center;
+   flex-wrap: nowrap; /* Prevent wrapping */
 `;
 
 export const Step = styled.div`
@@ -47,13 +64,25 @@ export const StepText = styled.span`
    color: ${(props) => (props.active ? '#12B28C' : '#666666')};
    font-size: 14px;
    font-weight: ${(props) => (props.active ? 'bold' : 'normal')};
+   white-space: nowrap; /* Prevent text from wrapping */
 `;
 
 export const StepLine = styled.div`
-   width: 70px;
+   width: 60px; /* Default */
    height: 2px;
-   background: ${(props) => (props.active ? '#12B28C' : '#CCCCCC')};
+   background: none; /* Remove solid background */
+   border-top: 2px dashed ${(props) => (props.active ? '#12B28C' : '#CCCCCC')}; /* Dashed Line */
    margin: 0 5px;
+
+   @media (max-width: 768px) {
+      /* Responsive Adjustment */
+      width: 40px;
+   }
+
+   @media (min-width: 1024px) {
+      /* Large Screens */
+      width: 80px;
+   }
 `;
 
 export const ContentContainer = styled.div`

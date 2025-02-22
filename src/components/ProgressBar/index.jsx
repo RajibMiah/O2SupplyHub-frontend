@@ -9,7 +9,7 @@ const ProgressBar = ({ questions }) => {
       <Steps>
          {questions.map((_, index) => (
             <StepWrapper key={index}>
-               <Step active={!resultPage && index === step}>{index + 1}</Step>
+               <Step active={!resultPage && index <= step}>{index + 1}</Step>
                <StepText active={!resultPage && index === step}>Step</StepText>
                {index !== questions.length && <StepLine active={index < step} />}
             </StepWrapper>
@@ -17,7 +17,7 @@ const ProgressBar = ({ questions }) => {
 
          {/* ✅ Ensure the "Result" step is highlighted correctly */}
          <StepWrapper>
-            <Step active={resultPage}>6</Step>
+            <Step active={resultPage}>{questions?.length + 1}</Step>
             <StepText active={resultPage}>Result</StepText>
          </StepWrapper>
       </Steps>

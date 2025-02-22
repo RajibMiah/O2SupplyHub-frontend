@@ -1,9 +1,21 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const Container = styled.div`
    text-align: center;
-   padding: 8rem;
    font-family: 'Poppins', sans-serif;
+   padding: 0; /* Default: Small Screens (Mobile) */
+
+   @media (min-width: 768px) {
+      padding: 0.5rem; /* Medium Screens (Tablets) */
+   }
+
+   @media (min-width: 1024px) {
+      padding: 0.5rem;
+   }
+   @media (min-width: 1400px) {
+      padding: 8rem; /* Large Screens (Desktops & Above) */
+   }
 `;
 
 export const Title = styled.h2`
@@ -90,15 +102,39 @@ export const ContentContainer = styled.div`
    //    justify-content: space-around;
    gap: 5rem;
    margin: 5rem;
+   @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      margin: 1rem;
+   }
+`;
+
+export const Layout = styled.div`
+   display: flex;
+   justify-content: space-around;
+   @media (max-width: 768px) {
+      flex-direction: column;
+   }
 `;
 
 export const ImageContainer = styled.div``;
+
+export const MotionImgContainer = styled(motion.img)`
+   width: '100%';
+   borderradius: '10px';
+   @media (min-width: 768px) {
+      width: 40%;
+   }
+`;
 
 export const QuestionContainer = styled.div`
    background: #f2fdfc;
    padding: 20px;
    border-radius: 10px;
    width: 50%;
+   @media (max-width: 768px) {
+      width: 100%;
+   }
 `;
 
 export const QuestionTitle = styled.h3`

@@ -14,14 +14,9 @@ import {
    OtherOption,
    ButtonContainer,
    Button,
+   Layout,
 } from '@styles/selectionStyle';
 import { useState } from 'react';
-import styled from 'styled-components';
-
-const Layout = styled.div`
-   display: flex;
-   justify-content: space-around;
-`;
 
 const QuestionStep = ({ questions }) => {
    const dispatch = useDispatch();

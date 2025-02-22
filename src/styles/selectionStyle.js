@@ -57,8 +57,8 @@ export const StepLine = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-   display: flex;
-   justify-content: space-around;
+   //    display: flex;
+   //    justify-content: space-around;
    gap: 5rem;
    margin: 5rem;
 `;
@@ -154,7 +154,8 @@ export const ButtonContainer = styled.div`
    justify-content: right;
    gap: 20px;
    width: 90%;
-   margin-top: -3rem;
+   margin-top: 1rem;
+   margin-left: 3rem;
 `;
 
 export const Button = styled.button`
@@ -222,6 +223,37 @@ export const ResultBox = styled.div`
       font-size: 14px;
       cursor: pointer;
       border-radius: 5px;
+   }
+`;
+
+export const QuantitySelector = styled.div`
+   display: inline-flex;
+   align-items: center;
+   //border: 1px solid #12b28c;
+
+   overflow: hidden;
+   background: #f2fdfc;
+
+   button {
+      background: #12b28c;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+   }
+
+   button:hover {
+      background: #0d928d;
+   }
+
+   span {
+      padding: 6px 12px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #2c2c2e;
    }
 `;
 

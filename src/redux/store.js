@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import authReducer from '@redux/slices/authSlice';
 import selectionReducer from '@redux/slices/selectionSlice';
 import {
@@ -17,11 +17,12 @@ import storage from 'redux-persist/lib/storage'; // Local storage
 const persistConfig = {
    key: 'auth',
    storage,
-   blacklist: ['selection'],
+   //  blacklist: ['selection'],
 };
 
+const rootRecuders = combineReducers(authReducer, selectionReducer);
 // Wrap the auth reducer with persistReducer
-const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+const persistedAuthReducer = persistReducer(persistConfig, rootRecuders);
 
 // Configure Store
 export const store = configureStore({

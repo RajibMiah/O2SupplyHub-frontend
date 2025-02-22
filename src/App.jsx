@@ -5,7 +5,7 @@ import Invoice from '@pages/invoice';
 import Login from '@pages/auth/login';
 import Register from '@pages/auth/register';
 import CylinderSelection from '@pages/selection';
-// import NotFound from '@/pages/NotFound';
+import NotFound from './pages/NotFound';
 import ProtectedRoute from '@components/ProtectedRoute';
 import PublicRoute from '@components/PublicRoute'; // Import PublicRoute
 
@@ -31,7 +31,7 @@ const App = () => {
          </Route>
 
          {/* Not Found Page */}
-         {/* <Route path="/not-found" element={<NotFound />} /> */}
+         <Route path="/not-found" element={<NotFound />} />
 
          {/* Redirect unknown routes to "/not-found" */}
          <Route path="*" element={<Navigate to="/not-found" replace />} />

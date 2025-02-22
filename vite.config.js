@@ -9,6 +9,8 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
    plugins: [react()],
+   // Ensure the base path is correctly set if your app is not at the root
+   base: '/',
    resolve: {
       alias: {
          '@': path.resolve(__dirname, 'src'), // Alias '@' points to 'src/' folder

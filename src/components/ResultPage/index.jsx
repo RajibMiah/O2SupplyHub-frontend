@@ -10,15 +10,25 @@ import {
    Button,
    QuantitySelector,
 } from '@styles/selectionStyle';
+import { useNavigate } from 'react-router-dom';
 
 import image1 from '@assets/images/image1.jpg';
 
 const ResultPage = () => {
    const dispatch = useDispatch();
+   const navigate = useNavigate();
+
    const [quantity, setQuantity] = useState(1);
 
    const increaseQuantity = () => setQuantity((prev) => prev + 1);
    const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+
+   const handlePurchase = () => {
+      // ✅ Dispatch action to set result page to false
+      dispatch(setResultPage(false));
+      // ✅ Navigate to customer-info page
+      navigate('/customer-info');
+   };
 
    return (
       <ResultContainer>
@@ -75,7 +85,9 @@ const ResultPage = () => {
                {/* ✅ Navigation Buttons */}
                <ButtonContainer>
                   <Button onClick={() => dispatch(setResultPage(false))}>Prev</Button>
-                  <Button primary>Purchase Now</Button>
+                  <Button primary onClick={handlePurchase}>
+                     Purchase Now
+                  </Button>
                </ButtonContainer>
             </DetailsWrapper>
          </ContentWrapper>

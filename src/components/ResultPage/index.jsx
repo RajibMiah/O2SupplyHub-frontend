@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { setResultPage } from '@redux/slices/selectionSlice';
 import { useState } from 'react';
+import { FaCheckCircle } from 'react-icons/fa';
 import {
    ResultContainer,
    ImageContainer,
@@ -24,9 +25,7 @@ const ResultPage = () => {
    const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
    const handlePurchase = () => {
-      // ✅ Dispatch action to set result page to false
       dispatch(setResultPage(false));
-      // ✅ Navigate to customer-info page
       navigate('/customer-info');
    };
 
@@ -44,45 +43,51 @@ const ResultPage = () => {
             <DetailsWrapper>
                <ResultBox>
                   <h3>
-                     Recommended OC <strong>Aura® 10 Nano</strong>
+                     <strong>Aura® 10 Nano</strong>
                   </h3>
+                  <PriceWrapper>
+                     <RetailPrice>CAD $7,428.75</RetailPrice>
+                     <OrText>Or</OrText>
+                     <LeasePrice>5 Year Monthly Lease Plan - CAD $158.77</LeasePrice>
+                  </PriceWrapper>
 
-                  {/* ✅ Quantity Selector */}
-                  <p>
-                     Quantity:
+                  {/* Quantity Selector */}
+                  <QuantityContainer>
+                     <p>Quantity</p>
                      <QuantitySelector>
                         <button onClick={decreaseQuantity}>-</button>
                         <span>{quantity}</span>
                         <button onClick={increaseQuantity}>+</button>
                      </QuantitySelector>
-                  </p>
-
-                  <p>
-                     Total Retail Price: <strong>CAD $7,428.75</strong>
-                  </p>
-                  <p>
-                     EMI Plan: <strong>CAD $619.06/mo. for 12 mo.*</strong>
-                  </p>
-                  <p>
-                     5 Year Weekly Lease Plan: <strong>CAD $34.29</strong>
-                  </p>
-                  <p>
-                     5 Year Monthly Lease Plan: <strong>CAD $158.77</strong>
-                  </p>
+                  </QuantityContainer>
                </ResultBox>
 
+               {/* Key Benefits Section */}
                <KeyBenefits>
                   <h4>Key Benefits for You</h4>
                   <ul>
-                     <li>5-year warranty including parts/labor/shipping.</li>
-                     <li>Own it for $1.00 at the end of 5 years.</li>
-                     <li>Can extend lease or buy warranty.</li>
-                     <li>Manufacturer covers all repair/maintenance costs.</li>
-                     <li>Remote monitoring available.</li>
+                     <BenefitItem>
+                        <FaCheckCircle /> All units have a 5-year warranty including
+                        parts/labor/shipping.
+                     </BenefitItem>
+                     <BenefitItem>
+                        <FaCheckCircle /> Customer owns it for $1.00 at the end of the 5-year term.
+                     </BenefitItem>
+                     <BenefitItem>
+                        <FaCheckCircle /> Customer can re-enroll into a new 5-year lease or extend
+                        the warranty.
+                     </BenefitItem>
+                     <BenefitItem>
+                        <FaCheckCircle /> Manufacturer is responsible for all repair/maintenance
+                        costs.
+                     </BenefitItem>
+                     <BenefitItem>
+                        <FaCheckCircle /> Every unit has remote monitoring for real-time
+                        manufacturer tracking.
+                     </BenefitItem>
                   </ul>
                </KeyBenefits>
 
-               {/* ✅ Navigation Buttons */}
                <ButtonContainer>
                   <Button onClick={() => dispatch(setResultPage(false))}>Prev</Button>
                   <Button primary onClick={handlePurchase}>
@@ -113,6 +118,13 @@ const ContentWrapper = styled.div`
 `;
 
 const ImageWrapper = styled(ImageContainer)`
+   text-align: center;
+   padding: 2rem 4rem;
+   background: #ffffff;
+   border-radius: 12px;
+   border: 2px solid #dfdfdf;
+   margin: auto;
+   margin: auto;
    img {
       width: 30rem;
       display: block;
@@ -124,4 +136,47 @@ const DetailsWrapper = styled.div`
    display: flex;
    flex-direction: column;
    gap: 1.5rem;
+`;
+export const BenefitItem = styled.li`
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   font-size: 14px;
+   color: #333;
+   margin: 8px 0;
+
+   svg {
+      color: #0d928d;
+   }
+`;
+export const PriceWrapper = styled.div`
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 5px;
+   font-size: 16px;
+   font-weight: bold;
+   margin-top: 8px;
+`;
+export const RetailPrice = styled.span`
+   color: #0d928d;
+   font-size: 18px;
+`;
+
+export const OrText = styled.span`
+   font-size: 14px;
+   color: #555;
+`;
+
+export const LeasePrice = styled.span`
+   color: #0d928d;
+   font-size: 16px;
+`;
+
+export const QuantityContainer = styled.div`
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-top: 10px;
+   font-size: 14px;
 `;

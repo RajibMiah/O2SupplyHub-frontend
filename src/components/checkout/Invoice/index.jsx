@@ -14,7 +14,7 @@ const Cotainer = styled.div`
 `;
 
 const InvoiceContainer = styled.div`
-   background: #e6f7f7;
+   background: #f2fdfc;
    padding: 1.5rem;
    border-radius: 10px;
    margin-bottom: 1.5rem;
@@ -32,7 +32,7 @@ const BillSection = styled.div`
    flex-direction: column;
    justify-content: space-between;
    align-items: flex-start;
-   background: #e6f7f7;
+   background: #f2fdfc;
    padding: 14px 0;
    border-radius: 10px;
    margin-bottom: 1.5rem;
@@ -147,7 +147,7 @@ const Total = styled.div`
    font-weight: bold;
    margin-top: 10px;
    padding: 12px;
-   background: #e6f7f7;
+   background: #f2fdfc;
    border-radius: 5px;
    width: 16rem;
 `;
@@ -195,7 +195,7 @@ const ContactInfo = styled.div`
 `;
 
 const BankDetails = styled.div`
-   background: #eef8f8;
+   background: #f2fdfc;
    padding: 10px;
    border-radius: 5px;
    font-size: 12px;

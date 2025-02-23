@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 const Card = styled.div`
-   background: #d4f3f3;
+   background: #f2fdfc;
    padding: 2rem;
    border-radius: 10px;
    width: 28rem;
@@ -49,6 +49,7 @@ const OrderNumber = styled.p`
 const Button = styled.button`
    width: 100%;
    padding: 12px;
+   margin: 16px 0px;
    background: ${(props) => (props.primary ? '#0d928d' : 'transparent')};
    color: ${(props) => (props.primary ? 'white' : '#0d928d')};
    font-size: 14px;

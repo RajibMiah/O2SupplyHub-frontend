@@ -62,7 +62,7 @@ export const Step = styled.div`
    width: 30px;
    height: 30px;
    border-radius: 50%;
-   background: ${(props) => (props.active ? '#12B28C' : '#CCCCCC')};
+   background: ${(props) => (props.active ? '#0d928d' : '#CCCCCC')};
    color: ${(props) => (props.active ? 'white' : '#666666')};
    display: flex;
    align-items: center;
@@ -98,13 +98,12 @@ export const StepLine = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-   //    display: flex;
-   //    justify-content: space-around;
-   margin: 3.5rem 5rem;
-   @media (max-width: 768px) {
-      display: flex;
-      flex-direction: column;
-      margin: 1rem;
+   display: flex;
+   flex-direction: column;
+   margin: 3.5rem auto;
+   width: 100%;
+   @media (min-width: 2200px) {
+      width: 55%;
    }
 `;
 
@@ -247,20 +246,18 @@ export const Button = styled.button`
 
 /* ====================== ✅ Added Result Page Styles ====================== */
 export const ResultContainer = styled.div`
-   text-align: center;
-   padding: 2rem 4rem;
-   background: #fff;
-   border-radius: 12px;
-   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-   //    max-width: 800px;
-   margin: auto;
+   margin: 7.5rem auto;
+   width: 100%;
+
+   @media (min-width: 2200px) {
+      width: 55%;
+   }
 `;
 
 export const ResultBox = styled.div`
    background: #f2fdfc;
    padding: 2rem;
    border-radius: 10px;
-   margin-top: 2rem;
    text-align: left;
 
    h3 {
@@ -322,7 +319,7 @@ export const QuantitySelector = styled.div`
 `;
 
 export const KeyBenefits = styled.div`
-   background: #f9f9f9;
+   background: #f2fdfc;
    padding: 2rem;
    border-radius: 10px;
    margin-top: 2rem;

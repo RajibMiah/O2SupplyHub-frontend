@@ -4,8 +4,7 @@ import { FaCreditCard } from 'react-icons/fa';
 import { IoArrowBack } from 'react-icons/io5';
 import CardComponent from '@/components/checkout/Card';
 import FinanceForm from '@/components/checkout/Finance';
-// Dummy Components for Payment Methods
-const InvoiceComponent = () => <ContentBox>Invoice Payment Details...</ContentBox>;
+import InvoiceComponent from '@/components/checkout/Invoice';
 
 const Container = styled.div`
    display: flex;
@@ -144,15 +143,15 @@ const RenderContainer = styled.div`
    align-items: center;
 `;
 
-const ContentBox = styled.div`
-   background: white;
-   padding: 2rem;
-   border-radius: 8px;
-   max-width: 450px;
-   text-align: center;
-   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-   border: 1px solid #ddd;
-`;
+// const ContentBox = styled.div`
+//    background: white;
+//    padding: 2rem;
+//    border-radius: 8px;
+//    max-width: 450px;
+//    text-align: center;
+//    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+//    border: 1px solid #ddd;
+// `;
 
 const CheckoutPage = () => {
    const [paymentMethod, setPaymentMethod] = useState('Card');

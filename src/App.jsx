@@ -8,6 +8,7 @@ import CylinderSelection from '@pages/selection';
 import NotFound from './pages/NotFound';
 import ProtectedRoute from '@components/ProtectedRoute';
 import PublicRoute from '@components/PublicRoute'; // Import PublicRoute
+import CustomerInfo from '@pages/CustomerInfo';
 
 const App = () => {
    return (
@@ -22,6 +23,7 @@ const App = () => {
          </Route>
 
          <Route path="/cylinder-selection" element={<CylinderSelection />} />
+         <Route path="/customer-info" element={<CustomerInfo />} />
 
          {/* Protected Routes (Require authentication) */}
          <Route element={<ProtectedRoute />}>

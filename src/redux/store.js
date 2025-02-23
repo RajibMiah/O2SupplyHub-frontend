@@ -2,6 +2,8 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import authReducer from '@redux/slices/authSlice';
 import selectionReducer from '@redux/slices/selectionSlice';
 import uiReducer from '@redux/slices/uiSlice';
+import customerInfo from '@redux/slices/customerInfoSlice';
+
 import {
    persistStore,
    persistReducer,
@@ -26,6 +28,7 @@ const rootReducer = combineReducers({
    auth: authReducer, // Persisted Reducer
    selection: selectionReducer, // Non-Persisted Reducer
    ui: uiReducer, // Non-Persisted Reducer
+   customerInfo,
 });
 
 // Wrap the auth reducer with persistReducer

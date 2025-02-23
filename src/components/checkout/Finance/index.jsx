@@ -36,13 +36,6 @@ const Description = styled.p`
    color: #555;
 `;
 
-// const DetailsList = styled.ul`
-//    text-align: left;
-//    font-size: 14px;
-//    margin-top: 10px;
-//    color: #444;
-//    padding-left: 1rem;
-// `;
 const DetailsContainer = styled.div`
    display: flex;
    flex-direction: column;

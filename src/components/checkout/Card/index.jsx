@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import { useNavigate } from 'react-router-dom';
 const PaymentContainer = styled.div`
    display: flex;
    flex-direction: column;
@@ -36,8 +36,10 @@ const Disclaimer = styled.p`
 `;
 
 const CardComponent = () => {
+   const navigate = useNavigate();
    const onClick = () => {
       alert('Redirecting to Payment Gateway');
+      navigate('/checkout-complete');
    };
    return (
       <PaymentContainer>

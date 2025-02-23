@@ -10,6 +10,7 @@ import ProtectedRoute from '@components/ProtectedRoute';
 import PublicRoute from '@components/PublicRoute'; // Import PublicRoute
 import CustomerInfo from '@pages/CustomerInfo';
 import Checkout from '@pages/Checkout';
+import CheckoutComplete from '@pages/Checkout/checkout-complete';
 
 const App = () => {
    return (
@@ -26,6 +27,8 @@ const App = () => {
          <Route path="/cylinder-selection" element={<CylinderSelection />} />
          <Route path="/customer-info" element={<CustomerInfo />} />
          <Route path="/checkout" element={<Checkout />} />
+
+         <Route path="/checkout-complete" element={<CheckoutComplete />} />
          {/* Protected Routes (Require authentication) */}
          <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<Profile />} />

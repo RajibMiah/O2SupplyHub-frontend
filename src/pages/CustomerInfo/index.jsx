@@ -1,5 +1,6 @@
 import useCustomerForm from '@hooks/useCustomerForm';
 import InputField from '@/components/InputField';
+import { useNavigate } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
 // import { updateCustomerInfo } from '@/redux/slices/customerInfoSlice';
 
@@ -18,12 +19,16 @@ import {
 
 const CustomerInformation = () => {
    //    const dispatch = useDispatch();
+   const navigate = useNavigate();
    const { formData, handleInputChange } = useCustomerForm();
 
    // Handle Next Button Click
    const handleNext = () => {
       console.log('Submitted Form Data:', formData); // ✅ Logs the data in console
       alert(`DATA::\n ${JSON.stringify(formData, null, 2)}`);
+
+      navigate('/checkout');
+
       //   dispatch(updateCustomerInfo(formData));
    };
 

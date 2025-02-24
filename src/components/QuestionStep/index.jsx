@@ -11,11 +11,9 @@ import {
    OptionText,
    CustomRadio,
    HiddenRadio,
-   //    OtherOption,
    ButtonContainer,
    Button,
    Layout,
-   //    MotionImgContainer,
 } from '@styles/selectionStyle';
 import { useState } from 'react';
 import image1 from '@assets/images/image1.jpg';
@@ -39,8 +37,19 @@ const QuestionStep = ({ questions }) => {
       dispatch(setResultPage(true));
    };
 
+   const filteredQuestions = questions.filter((q) => {
+      if (q.id === 5 && selectedOptions[3] === 'B. No') {
+         return false; // Skip question 5
+      }
+      return true;
+   });
+
    const handleNext = () => {
-      handleNavigation(step + 1);
+      if (filteredQuestions[step].id === 4 && selectedOptions[step] === 'B. No') {
+         handleSubmit();
+      } else {
+         handleNavigation(step + 1);
+      }
    };
 
    return (

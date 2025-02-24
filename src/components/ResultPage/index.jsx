@@ -1,29 +1,45 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setResultPage } from '@redux/slices/selectionSlice';
-import { useState } from 'react';
-import { FaCheckCircle } from 'react-icons/fa';
 
 import {
    ResultContainer,
-   ImageContainer,
+   // ImageContainer,
    ResultBox,
    KeyBenefits,
    ButtonContainer,
    Button,
    QuantitySelector,
+   HeaderSection,
+   ContentWrapper,
+   ImageWrapper,
+   DetailsWrapper,
+   TitleWrapper,
+   RetailPrice,
+   OrText,
+   PriceWrapper,
+   LeasePrice,
+   QuantityContainer,
+   BenefitItem,
 } from '@styles/selectionStyle';
+
 import { useNavigate } from 'react-router-dom';
+import {
+   setQuantity,
+   selectQuantity,
+   selectTotalRetailPrice,
+   selectTotalLeasePrice,
+} from '@redux/slices/selectionSlice';
 
 import image1 from '@assets/images/image1.jpg';
+import { FaCheckCircle } from 'react-icons/fa';
 
 const ResultPage = () => {
    const dispatch = useDispatch();
    const navigate = useNavigate();
+   const quantity = useSelector(selectQuantity);
 
-   const [quantity, setQuantity] = useState(1);
-
-   const increaseQuantity = () => setQuantity((prev) => prev + 1);
-   const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+   const totalRetailPrice = useSelector(selectTotalRetailPrice);
+   const totalLeasePrice = useSelector(selectTotalLeasePrice);
 
    const handlePurchase = async () => {
       navigate('/customer-info');
@@ -42,22 +58,29 @@ const ResultPage = () => {
 
             <DetailsWrapper>
                <ResultBox>
-                  <h3>
-                     <strong>Aura® 10 Nano</strong>
-                  </h3>
+                  <TitleWrapper>
+                     <h3>
+                        <strong>Aura® 10 Nano</strong>
+                     </h3>
+                     <RetailPrice>CAD ${totalRetailPrice.toFixed(2)}</RetailPrice>
+                  </TitleWrapper>
+
+                  <OrText>Or</OrText>
+
                   <PriceWrapper>
-                     <RetailPrice>CAD $7,428.75</RetailPrice>
-                     <OrText>Or</OrText>
-                     <LeasePrice>5 Year Monthly Lease Plan - CAD $158.77</LeasePrice>
+                     <LeasePrice>
+                        <span>5 Year Monthly Lease Plan</span>
+                        <span>CAD ${totalLeasePrice.toFixed(2)}</span>
+                     </LeasePrice>
                   </PriceWrapper>
 
                   {/* Quantity Selector */}
                   <QuantityContainer>
                      <p>Quantity</p>
                      <QuantitySelector>
-                        <button onClick={decreaseQuantity}>-</button>
+                        <button onClick={() => dispatch(setQuantity(quantity - 1))}>-</button>
                         <span>{quantity}</span>
-                        <button onClick={increaseQuantity}>+</button>
+                        <button onClick={() => dispatch(setQuantity(quantity + 1))}>+</button>
                      </QuantitySelector>
                   </QuantityContainer>
                </ResultBox>
@@ -101,82 +124,3 @@ const ResultPage = () => {
 };
 
 export default ResultPage;
-
-// Styled Components Fixes
-import styled from 'styled-components';
-
-const HeaderSection = styled.div`
-   text-align: center;
-   color: #0d928d;
-`;
-
-const ContentWrapper = styled.div`
-   display: flex;
-   justify-content: space-around;
-   padding-top: 2.5rem;
-   align-items: center;
-`;
-
-const ImageWrapper = styled(ImageContainer)`
-   text-align: center;
-   padding: 2rem 4rem;
-   background: #ffffff;
-   border-radius: 12px;
-   border: 2px solid #dfdfdf;
-   margin: auto;
-   margin: auto;
-   img {
-      width: 30rem;
-      display: block;
-      margin: 0 auto;
-   }
-`;
-
-const DetailsWrapper = styled.div`
-   display: flex;
-   flex-direction: column;
-   gap: 1.5rem;
-`;
-export const BenefitItem = styled.li`
-   display: flex;
-   align-items: center;
-   gap: 8px;
-   font-size: 14px;
-   color: #333;
-   margin: 8px 0;
-
-   svg {
-      color: #0d928d;
-   }
-`;
-export const PriceWrapper = styled.div`
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   gap: 5px;
-   font-size: 16px;
-   font-weight: bold;
-   margin-top: 8px;
-`;
-export const RetailPrice = styled.span`
-   color: #0d928d;
-   font-size: 18px;
-`;
-
-export const OrText = styled.span`
-   font-size: 14px;
-   color: #555;
-`;
-
-export const LeasePrice = styled.span`
-   color: #0d928d;
-   font-size: 16px;
-`;
-
-export const QuantityContainer = styled.div`
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   margin-top: 10px;
-   font-size: 14px;
-`;

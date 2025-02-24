@@ -296,12 +296,12 @@ export const QuantitySelector = styled.div`
    background: #f2fdfc;
 
    button {
-      background: #12b28c;
+      background: #12b28c7d;
       color: white;
       border: none;
       padding: 6px 12px;
       font-size: 14px;
-      border-radius: 5px;
+      border-radius: 24px;
       cursor: pointer;
       transition: 0.3s;
    }
@@ -342,4 +342,105 @@ export const KeyBenefits = styled.div`
       font-size: 14px;
       margin-bottom: 8px;
    }
+`;
+
+/*======================= ✅ Added Result Page Styles ====================== */
+// Styled Components Fixes
+
+export const HeaderSection = styled.div`
+   text-align: center;
+   color: #0d928d;
+`;
+
+export const ContentWrapper = styled.div`
+   display: flex;
+   justify-content: space-around;
+   padding-top: 2.5rem;
+   align-items: center;
+`;
+
+export const ImageWrapper = styled(ImageContainer)`
+   text-align: center;
+   padding: 2rem 4rem;
+   background: #ffffff;
+   border-radius: 12px;
+   border: 2px solid #dfdfdf;
+   margin: auto;
+   margin: auto;
+   img {
+      width: 30rem;
+      display: block;
+      margin: 0 auto;
+   }
+`;
+
+export const DetailsWrapper = styled.div`
+   display: flex;
+   flex-direction: column;
+   gap: 1.5rem;
+`;
+export const BenefitItem = styled.li`
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   font-size: 14px;
+   color: #333;
+   margin: 8px 0;
+
+   svg {
+      color: #0d928d;
+   }
+`;
+
+export const TitleWrapper = styled.div`
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   h3 {
+      font-size: 18px;
+      font-weight: 400;
+   }
+`;
+export const PriceWrapper = styled.div`
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 5px;
+   font-size: 16px;
+   font-weight: bold;
+   margin-top: 8px;
+`;
+export const RetailPrice = styled.span`
+   color: #0d928d;
+   font-size: 18px;
+`;
+
+export const OrText = styled.span`
+   font-size: 23px;
+   width: 100%;
+   display: flex;
+   justify-content: flex-end;
+   padding-right: 3rem;
+   color: #0d928d;
+`;
+
+export const LeasePrice = styled.span`
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+   color: #0d928d;
+   font-size: 16px;
+   span {
+      font-size: 18px;
+      font-weight: 400;
+   }
+`;
+
+export const QuantityContainer = styled.div`
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-top: 10px;
+   font-size: 14px;
 `;

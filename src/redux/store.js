@@ -20,7 +20,7 @@ import storage from 'redux-persist/lib/storage'; // Local storage
 const persistConfig = {
    key: 'auth',
    storage,
-   whitelist: ['auth'], // Persist only auth state
+   whitelist: ['auth', 'selection', 'customerInfo'], // Persist only auth state
 };
 
 // Combine Reducers Correctly
@@ -37,6 +37,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 // Configure Store
 export const store = configureStore({
    reducer: persistedReducer,
+   devTools: import.meta.env.MODE !== 'production',
    middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
          serializableCheck: {

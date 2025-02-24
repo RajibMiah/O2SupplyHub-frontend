@@ -10,6 +10,10 @@ export const HeaderContainer = styled.header`
    background: ${(props) => props.theme.bodyBackground};
    border-bottom: 1px solid ${(props) => props.theme.borderBottom};
    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+   @media print {
+      display: none;
+   }
 `;
 
 export const HeaderSection = styled.div`

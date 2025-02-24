@@ -1,234 +1,89 @@
-import styled from 'styled-components';
 import CompanyLogo from '@/assets/logo.svg';
 import BankLogo from '@/assets/refered_bank.svg';
-const Container = styled.div`
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   background: #ffffff;
-   padding: 1rem;
-   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-   border-radius: 24px;
-`;
+import {
+   Container,
+   Description,
+   DetailsContainer,
+   Header,
+   HeaderContant,
+   ListItemContainer,
+   Title,
+   Text,
+   DetailItem,
+   Note,
+   InputGrid,
+   Input,
+   SignatureSection,
+   SignatureBox,
+   SignatureInput,
+   Disclaimer,
+   ContactSection,
+   ContactInfo,
+   SubmitButtonContainer,
+   SubmitButton,
+   InputWrapper,
+   ErrorMessage,
+} from './styles';
 
-const Header = styled.div`
-   background: #e6f7f7;
-   padding: 1.5rem;
-   text-align: center;
-   border-radius: 10px;
-   margin-bottom: 1.5rem;
-`;
-
-const HeaderContant = styled.div`
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   gap: 1rem;
-`;
-const Title = styled.h2`
-   font-size: 1.5rem;
-   font-weight: bold;
-   color: #333;
-`;
-
-const Description = styled.p`
-   font-size: 14px;
-   color: #555;
-`;
-
-const DetailsContainer = styled.div`
-   display: flex;
-   flex-direction: column;
-   align-items: flex-start;
-   text-align: left;
-   padding-left: 1rem;
-`;
-
-const DetailItem = styled.div`
-   font-size: 14px;
-   color: #333;
-   display: flex;
-   gap: 8px;
-   align-items: center;
-   &::before {
-      content: '•';
-      color: #0d928d;
-      font-size: 18px;
-   }
-`;
-
-const Note = styled.div`
-   padding: 1rem 18px;
-
-   & p {
-      font-size: 12px;
-      color: #777;
-      text-align: left;
-   }
-`;
-
-const InputGrid = styled.div`
-   display: grid;
-   grid-template-columns: repeat(2, 1fr);
-   gap: 15px;
-   width: 100%;
-   padding: 0 18px;
-
-   @media (max-width: 600px) {
-      grid-template-columns: 1fr;
-   }
-`;
-
-const Input = styled.input`
-   width: 100%;
-   padding: 18px;
-   border: 1px solid #ccc;
-   border-radius: 5px;
-   font-size: 14px;
-   background: white;
-   outline: none;
-
-   &:focus {
-      border-color: #0d928d;
-   }
-`;
-
-const ListItemContainer = styled.div`
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   padding: 1rem 0;
-   gap: 6rem;
-`;
-
-const Text = styled.div`
-   font-size: 14px;
-   color: #000000;
-   font-weight: bold;
-`;
-
-const SignatureSection = styled.div`
-   display: flex;
-   justify-content: space-between;
-   width: 100%;
-   font-size: 14px;
-   font-weight: bold;
-   margin-top: 1.5rem;
-   align-items: center;
-   padding: 24px 22px;
-`;
-
-const SignatureBox = styled.div`
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   width: 48%; /* Keeps both boxes equal */
-
-   & span {
-      color: #121722;
-      font-size: 16px;
-   }
-`;
-
-const SignatureInput = styled.input`
-   width: 100%;
-   padding: 10px;
-   border: none; /* Removes all borders */
-   border-bottom: 1px solid #33333352;
-   border-radius: 0; /* Removes rounded corners */
-   font-size: 14px;
-   text-align: center;
-   margin-bottom: 5px;
-   background: transparent;
-   outline: none; /* Removes all outlines */
-   box-shadow: none; /* Ensures no shadow appears on focus */
-`;
-
-const Disclaimer = styled.p`
-   font-size: 12px;
-   color: #666;
-   margin-top: 15px;
-   text-align: justify;
-   padding: 0 12px;
-`;
-
-const ContactSection = styled.div`
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   width: 100%;
-   max-width: 900px;
-   margin: auto;
-   padding: 2rem 0;
-   gap: 2rem;
-
-   @media (max-width: 768px) {
-      flex-direction: column;
-      text-align: center;
-   }
-`;
-
-const ContactInfo = styled.div`
-   display: flex;
-   flex-direction: column;
-   flex: 1;
-   padding: 0px 40px;
-
-   img {
-      width: 120px;
-      height: 50px;
-      object-fit: contain;
-      margin-bottom: 10px;
-   }
-
-   h3 {
-      font-size: 1rem;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-   }
-
-   p {
-      font-size: 14px;
-      color: #333;
-      margin: 2px 0;
-   }
-
-   a {
-      color: #0d928d;
-      text-decoration: none;
-      //   font-weight: bold;
-
-      &:hover {
-         text-decoration: underline;
-      }
-   }
-`;
-const SubmitButtonContainer = styled.div`
-   display: flex;
-   justify-content: flex-end; /* Aligns button to the right */
-   width: 100%;
-   padding: 1rem 0; /* Adds spacing */
-`;
-
-const SubmitButton = styled.button`
-   padding: 12px 24px;
-   background: #0d928d;
-   color: white;
-   font-size: 15px;
-   font-weight: bold;
-   border: none;
-   border-radius: 5px;
-   cursor: pointer;
-   transition: background 0.3s ease;
-
-   &:hover {
-      background: #098675;
-   }
-`;
+import { useState } from 'react';
 
 const FinanceForm = () => {
+   const [formData, setFormData] = useState({
+      businessName: '',
+      taxId: '',
+      address: '',
+      cityStateZip: '',
+      phone: '',
+      email: '',
+      owner1Name: '',
+      owner1SSN: '',
+      owner1Email: '',
+      owner2Name: '',
+      owner2SSN: '',
+      owner2Email: '',
+      owner1Signature: '',
+      owner2Signature: '',
+   });
+
+   const [errors, setErrors] = useState({});
+
+   // Handle Input Change
+   const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({
+         ...prev,
+         [name]: value,
+      }));
+      // Remove error when user starts typing
+      setErrors((prev) => ({
+         ...prev,
+         [name]: '',
+      }));
+   };
+
+   // Validate Form
+   const validateForm = () => {
+      const newErrors = {};
+      Object.keys(formData).forEach((key) => {
+         if (!formData[key]) {
+            newErrors[key] = 'This field is required';
+         }
+      });
+
+      if (formData.owner1Signature != formData.owner2Signature) {
+         newErrors.owner2Signature = 'Signatures must match';
+      }
+
+      setErrors(newErrors);
+      return Object.keys(newErrors).length === 0;
+   };
+
+   // Handle Form Submission
    const handleSubmit = () => {
-      alert('Form Submitted');
+      if (validateForm()) {
+         console.log('📌 Form Submitted Data:', formData);
+         alert('✅ Form Submitted. Check console for data.');
+      }
    };
 
    return (
@@ -252,34 +107,77 @@ const FinanceForm = () => {
          </Header>
          <Note>
             <p>
-               {' '}
                Certain restrictions apply. All finance requests are subject to credit approval. All
                rates, payments, and terms are subject to change at any time.
             </p>
          </Note>
+
+         {/* ✅ Input Fields */}
          <InputGrid>
-            <Input placeholder="Legal Business Name" />
-            <Input placeholder="Federal Tax ID" />
-            <Input placeholder="Business Address" />
-            <Input placeholder="City, State, Zip" />
-            <Input placeholder="Office Phone Number" />
-            <Input placeholder="Office E-Mail" />
-            <Input placeholder="Owner Name (1)" />
-            <Input placeholder="Owner Social Security # (1)" />
-            <Input placeholder="E-Mail Address (1)" />
-            <Input placeholder="Owner Name (2)" />
-            <Input placeholder="Owner Social Security # (2)" />
-            <Input placeholder="E-Mail Address (2)" />
+            {[
+               { label: 'Legal Business Name', name: 'businessName' },
+               { label: 'Federal Tax ID', name: 'taxId' },
+               { label: 'Business Address', name: 'address' },
+               { label: 'City, State, Zip', name: 'cityStateZip' },
+               { label: 'Office Phone Number', name: 'phone' },
+               { label: 'Office E-Mail', name: 'email' },
+            ].map((field, index) => (
+               <InputWrapper key={index}>
+                  <Input
+                     placeholder={field.label}
+                     name={field.name}
+                     value={formData[field.name]}
+                     onChange={handleInputChange}
+                     error={errors[field.name]}
+                  />
+                  {errors[field.name] && <ErrorMessage>{errors[field.name]}</ErrorMessage>}
+               </InputWrapper>
+            ))}
+
+            {[
+               { label: 'Owner Name (1)', name: 'owner1Name' },
+               { label: 'Owner Social Security # (1)', name: 'owner1SSN' },
+               { label: 'E-Mail Address (1)', name: 'owner1Email' },
+               { label: 'Owner Name (2)', name: 'owner2Name' },
+               { label: 'Owner Social Security # (2)', name: 'owner2SSN' },
+               { label: 'E-Mail Address (2)', name: 'owner2Email' },
+            ].map((field, index) => (
+               <InputWrapper key={index}>
+                  <Input
+                     placeholder={field.label}
+                     name={field.name}
+                     value={formData[field.name]}
+                     onChange={handleInputChange}
+                     error={errors[field.name]}
+                  />
+                  {errors[field.name] && <ErrorMessage>{errors[field.name]}</ErrorMessage>}
+               </InputWrapper>
+            ))}
          </InputGrid>
 
+         {/* ✅ Signature Section */}
          <SignatureSection>
             <SignatureBox>
-               <SignatureInput type="text" placeholder="Sign here..." />
+               <SignatureInput
+                  type="text"
+                  placeholder="Sign here..."
+                  name="owner1Signature"
+                  value={formData.owner1Signature}
+                  onChange={handleInputChange}
+               />
                <span>Owner (1) Signature / Date:</span>
+               {errors.owner1Signature && <ErrorMessage>{errors.owner1Signature}</ErrorMessage>}
             </SignatureBox>
             <SignatureBox>
-               <SignatureInput type="text" placeholder="Sign here..." />
+               <SignatureInput
+                  type="text"
+                  placeholder="Sign here..."
+                  name="owner2Signature"
+                  value={formData.owner2Signature}
+                  onChange={handleInputChange}
+               />
                <span>Owner (2) Signature / Date:</span>
+               {errors.owner2Signature && <ErrorMessage>{errors.owner2Signature}</ErrorMessage>}
             </SignatureBox>
          </SignatureSection>
 

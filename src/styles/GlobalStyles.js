@@ -14,6 +14,24 @@ const GlobalStyles = createGlobalStyle`
     background-color: ${({ theme }) => theme.bodyBackground};
     color: ${({ theme }) => theme.textColor};
     transition: all 0.3s ease-in-out;
+    @media print {
+          body {
+              -webkit-print-color-adjust: exact !important; /* For Safari/Chrome */
+              print-color-adjust: exact !important; /* Standard property */
+          }
+
+          #invoice-print {
+              background: #ffffff !important; /* Ensure white background */
+              padding: 20px !important;
+          }
+
+          .InvoiceContainer, .Total, .BankDetails, .BillSection {
+              background: #f2fdfc !important; /* Ensure background color stays */
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
+          }
+        }
+
   }
 
   /* Default Container */

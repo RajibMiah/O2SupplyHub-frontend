@@ -21,8 +21,7 @@ import CustomerBilingInfo from '@/components/CustomerInformation/CustomerBilingI
 const CustomerInformation = () => {
    //    const dispatch = useDispatch();
    const navigate = useNavigate();
-   const { formData, handleInputChange, handleToggleShipping, validateForm, errors } =
-      useCustomerForm();
+   const { formData, handleInputChange, handleToggleShipping, errors } = useCustomerForm();
 
    const handleNext = () => {
       // if (!validateForm()) {

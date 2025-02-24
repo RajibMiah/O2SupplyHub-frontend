@@ -12,11 +12,11 @@ const App = () => {
       <Routes>
          <Route path="/" element={<Navigate to="/cylinder-selection" replace />} />
          <Route path="/cylinder-selection" element={<CylinderSelection />} />
+         <Route path="/customer-info" element={<CustomerInfo />} />
 
          {/* Protected Routes (Require authentication) */}
          <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<Profile />} />
-            <Route path="/customer-info" element={<CustomerInfo />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/checkout-complete" element={<CheckoutComplete />} />
          </Route>

@@ -14,7 +14,7 @@ export const Container = styled.div`
       padding: 0.5rem;
    }
    @media (min-width: 1400px) {
-      padding: 3rem 8rem; /* Large Screens (Desktops & Above) */
+      padding: 3rem 7rem; /* Large Screens (Desktops & Above) */
    }
 `;
 
@@ -122,6 +122,10 @@ export const MotionImgContainer = styled(motion.img)`
    borderradius: '10px';
    @media (max-width: 768px) {
       width: 40%;
+   }
+
+   &img {
+      max-width: 22rem;
    }
 `;
 
@@ -367,6 +371,8 @@ export const ImageWrapper = styled(ImageContainer)`
    border: 2px solid #dfdfdf;
    margin: auto;
    margin: auto;
+   // max-height: 30rem;
+
    img {
       width: 30rem;
       display: block;

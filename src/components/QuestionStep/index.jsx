@@ -34,6 +34,15 @@ const QuestionStep = ({ questions }) => {
       dispatch(setStep(newStep));
    };
 
+   const handleSubmit = () => {
+      alert(`selected options ${JSON.stringify(selectedOptions)}`);
+      dispatch(setResultPage(true));
+   };
+
+   const handleNext = () => {
+      handleNavigation(step + 1);
+   };
+
    return (
       <>
          <Layout>
@@ -110,11 +119,11 @@ const QuestionStep = ({ questions }) => {
                Prev
             </Button>
             {step === questions.length - 1 ? (
-               <Button primary onClick={() => dispatch(setResultPage(true))}>
+               <Button primary disabled={!selectedOptions[step]} onClick={handleSubmit}>
                   Submit
                </Button>
             ) : (
-               <Button primary onClick={() => handleNavigation(step + 1)}>
+               <Button primary disabled={!selectedOptions[step]} onClick={handleNext}>
                   Next
                </Button>
             )}

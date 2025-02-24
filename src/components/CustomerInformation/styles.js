@@ -90,13 +90,14 @@ export const ButtonGroup = styled.div`
 `;
 
 export const Button = styled.button`
-   background: ${(props) => (props.primary ? '#0d928d' : '#ddd')};
-   color: ${(props) => (props.primary ? 'white' : 'black')};
+   background: ${(props) => (props.disabled ? '#b5b5b5' : props.primary ? '#0d928d' : '#ddd')};
+   color: ${(props) => (props.disabled ? '#666' : props.primary ? 'white' : 'black')};
    padding: 14px 3rem;
    border: none;
-   cursor: pointer;
+   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
    border-radius: 5px;
    font-size: 14px;
+   transition: background 0.3s ease, color 0.3s ease;
 `;
 
 export const HeaderSection = styled.div`

@@ -21,17 +21,18 @@ import CustomerBilingInfo from '@/components/CustomerInformation/CustomerBilingI
 const CustomerInformation = () => {
    //    const dispatch = useDispatch();
    const navigate = useNavigate();
-   const { formData, handleInputChange, handleToggleShipping, errors } = useCustomerForm();
+   const { formData, handleInputChange, handleToggleShipping, errors, validateForm } =
+      useCustomerForm();
 
    const handleNext = () => {
-      // if (!validateForm()) {
-      //    return;
-      // }
+      if (!validateForm()) {
+         return;
+      }
 
       console.log('Submitted Form Data:', formData); // ✅ Logs the data in console
       alert(`DATA::\n ${JSON.stringify(formData, null, 2)}`);
 
-      navigate('/checkout');
+      // navigate('/checkout');
    };
 
    const handlePrevPage = () => {

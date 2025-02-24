@@ -10,8 +10,8 @@ const CustomerBilingInfo = ({ errors, formData, handleInputChange, handleToggleS
             <div>
                <InputField
                   placeholder="Facility Name"
-                  name="billing.facilityName"
-                  value={formData?.billing?.facilityName}
+                  name="billing.facilityName" // ✅ Ensure correct name
+                  value={formData?.billing?.facilityName || ''}
                   onChange={handleInputChange}
                />
                {errors?.['billing.facilityName'] && (
@@ -22,8 +22,8 @@ const CustomerBilingInfo = ({ errors, formData, handleInputChange, handleToggleS
             <div>
                <InputField
                   placeholder="Street Address"
-                  name="billing.streetAddress"
-                  value={formData?.billing?.streetAddress}
+                  name="billing.streetAddress" // ✅ Ensure correct name
+                  value={formData?.billing?.streetAddress || ''}
                   onChange={handleInputChange}
                />
                {errors?.['billing.streetAddress'] && (
@@ -34,8 +34,8 @@ const CustomerBilingInfo = ({ errors, formData, handleInputChange, handleToggleS
             <div>
                <InputField
                   placeholder="City"
-                  name="billing.city"
-                  value={formData?.billing?.city}
+                  name="billing.city" // ✅ Ensure correct name
+                  value={formData?.billing?.city || ''}
                   onChange={handleInputChange}
                />
                {errors?.['billing.city'] && <ErrorMessage>{errors['billing.city']}</ErrorMessage>}
@@ -44,8 +44,8 @@ const CustomerBilingInfo = ({ errors, formData, handleInputChange, handleToggleS
             <div>
                <InputField
                   placeholder="State"
-                  name="billing.state"
-                  value={formData?.billing?.state}
+                  name="billing.state" // ✅ Ensure correct name
+                  value={formData?.billing?.state || ''}
                   onChange={handleInputChange}
                />
                {errors?.['billing.state'] && <ErrorMessage>{errors['billing.state']}</ErrorMessage>}
@@ -54,12 +54,58 @@ const CustomerBilingInfo = ({ errors, formData, handleInputChange, handleToggleS
             <div>
                <InputField
                   placeholder="Zip"
-                  name="billing.zip"
-                  value={formData?.billing?.zip}
+                  name="billing.zip" // ✅ Ensure correct name
+                  value={formData?.billing?.zip || ''}
                   onChange={handleInputChange}
                />
                {errors?.['billing.zip'] && <ErrorMessage>{errors['billing.zip']}</ErrorMessage>}
             </div>
+
+            <div>
+               <InputField
+                  placeholder="Country"
+                  name="billing.country" // ✅ Ensure correct name
+                  value={formData?.billing?.country || ''}
+                  onChange={handleInputChange}
+               />
+               {errors?.['billing.country'] && (
+                  <ErrorMessage>{errors['billing.country']}</ErrorMessage>
+               )}
+            </div>
+
+            <div>
+               <InputField
+                  placeholder="Employer/Tax ID#"
+                  name="billing.taxId" // ✅ Ensure correct name
+                  value={formData?.billing?.taxId || ''}
+                  onChange={handleInputChange}
+               />
+               {errors?.['billing.taxId'] && <ErrorMessage>{errors['billing.taxId']}</ErrorMessage>}
+            </div>
+            <div>
+               <InputField
+                  placeholder="Receiving Type"
+                  name="billing.receivingType" // ✅ Ensure correct name
+                  value={formData?.billing.receivingType || ''}
+                  onChange={handleInputChange}
+               />
+               {errors?.['billing.receivingType'] && (
+                  <ErrorMessage>{errors['billing.receivingType']}</ErrorMessage>
+               )}
+            </div>
+            <InlineGrid>
+               <div>
+                  <InputField
+                     placeholder="Receiving Hours of Operation"
+                     name="billing.receivingHours" // ✅ Ensure correct name
+                     value={formData?.billing?.receivingHours || ''}
+                     onChange={handleInputChange}
+                  />
+                  {errors?.['billing.receivingHours'] && (
+                     <ErrorMessage>{errors['billing.receivingHours']}</ErrorMessage>
+                  )}
+               </div>
+            </InlineGrid>
          </Grid>
 
          <CheckboxContainer>
@@ -71,6 +117,7 @@ const CustomerBilingInfo = ({ errors, formData, handleInputChange, handleToggleS
             <span>Different Shipping Address</span>
          </CheckboxContainer>
 
+         {/* ✅ Only Show Shipping Fields if "Different Shipping" is checked */}
          {formData?.billing?.differentShipping && (
             <Section>
                <h3>Additional Shipping Information</h3>
@@ -79,7 +126,7 @@ const CustomerBilingInfo = ({ errors, formData, handleInputChange, handleToggleS
                      <InputField
                         placeholder="Facility Name"
                         name="shipping.facilityName"
-                        value={formData?.shipping?.facilityName}
+                        value={formData?.shipping?.facilityName || ''}
                         onChange={handleInputChange}
                      />
                      {errors?.['shipping.facilityName'] && (
@@ -91,7 +138,7 @@ const CustomerBilingInfo = ({ errors, formData, handleInputChange, handleToggleS
                      <InputField
                         placeholder="Street Address"
                         name="shipping.streetAddress"
-                        value={formData?.shipping?.streetAddress}
+                        value={formData?.shipping?.streetAddress || ''}
                         onChange={handleInputChange}
                      />
                      {errors?.['shipping.streetAddress'] && (
@@ -103,7 +150,7 @@ const CustomerBilingInfo = ({ errors, formData, handleInputChange, handleToggleS
                      <InputField
                         placeholder="City"
                         name="shipping.city"
-                        value={formData?.shipping?.city}
+                        value={formData?.shipping?.city || ''}
                         onChange={handleInputChange}
                      />
                      {errors?.['shipping.city'] && (
@@ -115,7 +162,7 @@ const CustomerBilingInfo = ({ errors, formData, handleInputChange, handleToggleS
                      <InputField
                         placeholder="State"
                         name="shipping.state"
-                        value={formData?.shipping?.state}
+                        value={formData?.shipping?.state || ''}
                         onChange={handleInputChange}
                      />
                      {errors?.['shipping.state'] && (
@@ -127,7 +174,7 @@ const CustomerBilingInfo = ({ errors, formData, handleInputChange, handleToggleS
                      <InputField
                         placeholder="Zip"
                         name="shipping.zip"
-                        value={formData?.shipping?.zip}
+                        value={formData?.shipping?.zip || ''}
                         onChange={handleInputChange}
                      />
                      {errors?.['shipping.zip'] && (
@@ -138,8 +185,8 @@ const CustomerBilingInfo = ({ errors, formData, handleInputChange, handleToggleS
                   <div>
                      <InputField
                         placeholder="Country"
-                        name="shipping.country"
-                        value={formData?.shipping?.country}
+                        name="shipping.country" // ✅ Ensure correct name
+                        value={formData?.shipping?.country || ''}
                         onChange={handleInputChange}
                      />
                      {errors?.['shipping.country'] && (
@@ -150,8 +197,8 @@ const CustomerBilingInfo = ({ errors, formData, handleInputChange, handleToggleS
                   <div>
                      <InputField
                         placeholder="Employer/Tax ID#"
-                        name="shipping.taxId"
-                        value={formData?.shipping?.taxId}
+                        name="shipping.taxId" // ✅ Ensure correct name
+                        value={formData?.shipping?.taxId || ''}
                         onChange={handleInputChange}
                      />
                      {errors?.['shipping.taxId'] && (
@@ -162,10 +209,9 @@ const CustomerBilingInfo = ({ errors, formData, handleInputChange, handleToggleS
                   <div>
                      <InputField
                         placeholder="Receiving Type"
-                        name="shipping.receivingType"
-                        value={formData?.shipping?.receivingType}
+                        name="shipping.receivingType" // ✅ Ensure correct name
+                        value={formData?.shipping?.receivingType || ''}
                         onChange={handleInputChange}
-                        isDropdown={true} // If it's a dropdown, handle separately
                      />
                      {errors?.['shipping.receivingType'] && (
                         <ErrorMessage>{errors['shipping.receivingType']}</ErrorMessage>
@@ -177,8 +223,8 @@ const CustomerBilingInfo = ({ errors, formData, handleInputChange, handleToggleS
                   <div>
                      <InputField
                         placeholder="Receiving Hours of Operation"
-                        name="shipping.receivingHours"
-                        value={formData?.shipping?.receivingHours}
+                        name="shipping.receivingHours" // ✅ Ensure correct name
+                        value={formData?.shipping?.receivingHours || ''}
                         onChange={handleInputChange}
                      />
                      {errors?.['shipping.receivingHours'] && (
@@ -201,6 +247,10 @@ CustomerBilingInfo.propTypes = {
          state: PropTypes.string,
          zip: PropTypes.string,
          differentShipping: PropTypes.bool,
+         country: PropTypes.string,
+         taxId: PropTypes.string,
+         receivingType: PropTypes.string,
+         receivingHours: PropTypes.string,
       }),
       shipping: PropTypes.shape({
          facilityName: PropTypes.string,
@@ -214,7 +264,7 @@ CustomerBilingInfo.propTypes = {
          receivingHours: PropTypes.string,
       }),
    }).isRequired,
-   errors: PropTypes.object.isRequired, // ✅ Added errors prop
+   errors: PropTypes.object.isRequired,
    handleInputChange: PropTypes.func.isRequired,
    handleToggleShipping: PropTypes.func.isRequired,
 };

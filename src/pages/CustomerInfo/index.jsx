@@ -30,9 +30,8 @@ const CustomerInformation = () => {
       }
 
       console.log('Submitted Form Data:', formData); // ✅ Logs the data in console
-      alert(`DATA::\n ${JSON.stringify(formData, null, 2)}`);
 
-      // navigate('/checkout');
+      navigate('/checkout');
    };
 
    const handlePrevPage = () => {

@@ -23,7 +23,7 @@ const Label = styled.label`
 const InputField = ({ label, placeholder, name, value, onChange }) => (
    <div>
       {label && <Label>{label}</Label>}
-      <Input name={name} placeholder={placeholder} value={value} onChange={onChange} />
+      <Input required name={name} placeholder={placeholder} value={value} onChange={onChange} />
    </div>
 );
 InputField.propTypes = {

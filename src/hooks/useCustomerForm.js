@@ -8,6 +8,17 @@ const useCustomerForm = () => {
          referenceNumber: '',
          preparedBy: '',
          location: '',
+         contact: {
+            facilityName: '',
+            streetAddress: '',
+            city: '',
+            state: '',
+            zip: '',
+            country: '',
+            taxId: '',
+            receivingType: '',
+            receivingHours: '',
+         },
       },
       billing: {
          facilityName: '',
@@ -19,7 +30,7 @@ const useCustomerForm = () => {
          taxId: '',
          receivingType: '',
          receivingHours: '',
-         differentShipping: false,
+         differentShipping: false, // ✅ Toggle This
       },
       shipping: {
          facilityName: '',
@@ -33,14 +44,16 @@ const useCustomerForm = () => {
          receivingHours: '',
       },
       instructions: {
-         constructionSite: false, // ✅ Now boolean
-         liftGate: false, // ✅ Now boolean
-         insideDelivery: false, // ✅ Now boolean
-         whiteGlove: false, // ✅ Now boolean
+         constructionSite: false,
+         liftGate: false,
+         insideDelivery: false,
+         whiteGlove: false,
       },
    });
 
-   // ✅ Handle Input Change
+   const [errors, setErrors] = useState({});
+
+   // ✅ Handle Input Change & Remove Errors
    const handleInputChange = (e) => {
       const { name, value, type, checked } = e.target;
       const newValue = type === 'checkbox' || type === 'radio' ? checked : value;
@@ -58,12 +71,59 @@ const useCustomerForm = () => {
          return { ...updatedData };
       });
 
-      console.log('Updated Form Data:', formData);
+      // ✅ Remove error message when user types
+      setErrors((prevErrors) => ({
+         ...prevErrors,
+         [name]: '',
+      }));
+   };
+
+   // ✅ Toggle Different Shipping Address Checkbox
+   const handleToggleShipping = () => {
+      setFormData((prevData) => ({
+         ...prevData,
+         billing: {
+            ...prevData.billing,
+            differentShipping: !prevData.billing.differentShipping, // ✅ Toggle Value
+         },
+      }));
+   };
+
+   // ✅ Validate Form Before Submission
+   const validateForm = () => {
+      const newErrors = {};
+
+      const checkFields = (obj, parentKey = '') => {
+         Object.entries(obj).forEach(([key, value]) => {
+            const fieldName = parentKey ? `${parentKey}.${key}` : key;
+            if (typeof value === 'object' && value !== null) {
+               checkFields(value, fieldName);
+            } else if (value === '' || value === null || value === undefined) {
+               newErrors[fieldName] = 'This field is required';
+            }
+         });
+      };
+
+      // ✅ Always Validate Customer & Billing Fields
+      checkFields(formData.customer, 'customer');
+      checkFields(formData.billing, 'billing');
+
+      // ✅ Only Validate Shipping Fields if `differentShipping` is TRUE
+      if (formData.billing.differentShipping) {
+         checkFields(formData.shipping, 'shipping');
+      }
+
+      setErrors(newErrors);
+      console.log('Errors:', formData);
+      return Object.keys(newErrors).length === 0;
    };
 
    return {
       formData,
       handleInputChange,
+      handleToggleShipping, // ✅ Return Toggle Function
+      validateForm,
+      errors,
    };
 };
 

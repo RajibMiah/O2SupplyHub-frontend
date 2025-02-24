@@ -4,6 +4,12 @@ export const MainContainer = styled.div`
    margin: 5rem;
 `;
 
+export const ErrorMessage = styled.p`
+   color: red;
+   font-size: 12px;
+   margin-top: 5px;
+`;
+
 export const Container = styled.div`
    background: #f0f8f8;
    padding: 5rem;

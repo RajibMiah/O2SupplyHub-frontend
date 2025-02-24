@@ -246,12 +246,12 @@ export const Button = styled.button`
 
 /* ====================== ✅ Added Result Page Styles ====================== */
 export const ResultContainer = styled.div`
-   margin: 7.5rem auto;
-   width: 100%;
+   // margin: 7.5rem auto;
+   // width: 90%;
 
-   @media (min-width: 2200px) {
-      width: 55%;
-   }
+   // @media (min-width: 2200px) {
+   //    width: 55%;
+   // }
 `;
 
 export const ResultBox = styled.div`

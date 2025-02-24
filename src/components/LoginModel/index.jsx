@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { setLoginModal, setSignupModal } from '@redux/slices/uiSlice';
-
+import { login } from '@redux/slices/authSlice';
 import { motion } from 'framer-motion';
 import {
    ModalOverlay,
@@ -20,6 +21,7 @@ import {
 
 const LoginModal = () => {
    const dispatch = useDispatch();
+   const navigate = useNavigate();
 
    const { loginModal } = useSelector((state) => state.ui);
    const [formData, setFormData] = useState({
@@ -39,10 +41,19 @@ const LoginModal = () => {
 
    const handleSubmit = (e) => {
       e.preventDefault();
+
       console.log('Login Data:', formData);
+      //FALSE LOGIN
+
+      dispatch(login());
+
       dispatch(setLoginModal(false)); // Close modal after submit
    };
 
+   const handleCancel = () => {
+      dispatch(setLoginModal(false));
+      navigate(-1);
+   };
    const handleRedirect = () => {
       dispatch(setLoginModal(false));
       dispatch(setSignupModal(true));
@@ -57,7 +68,7 @@ const LoginModal = () => {
                transition={{ duration: 0.3 }}
             >
                <ModalContainer>
-                  <CloseButton onClick={() => dispatch(setLoginModal(false))}>×</CloseButton>
+                  <CloseButton onClick={handleCancel}>×</CloseButton>
                   <h2>Login</h2>
                   <form onSubmit={handleSubmit}>
                      <Label>Email</Label>

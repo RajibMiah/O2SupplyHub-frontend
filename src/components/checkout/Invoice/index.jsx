@@ -245,6 +245,9 @@ const DownloadButton = styled.button`
 `;
 
 const Invoice = () => {
+   const handleDownload = () => {
+      alert('Downloaded Successfully');
+   };
    return (
       <Cotainer>
          {/* Header */}
@@ -344,7 +347,7 @@ const Invoice = () => {
 
          {/* Download Button */}
          <DownloadBtnContainer>
-            <DownloadButton>Download</DownloadButton>
+            <DownloadButton onClick={handleDownload}>Download</DownloadButton>
          </DownloadBtnContainer>
       </Cotainer>
    );

@@ -7,52 +7,53 @@ console.log('images', images);
 export const questions = [
    {
       id: 1,
-      question: 'What is the number of Oxygen Exam/Comfort outlets?',
+      question: 'How many anesthesia machine you use? ',
       options: [
-         { label: '1. Outlet (5 lpm)', value: '1' },
-         { label: '2. Outlets (10 lpm)', value: '2' },
-         { label: '3. Outlets (15 lpm)', value: '3' },
+         { label: 'A. 1-5', value: 'A.1-2' },
+         { label: 'B. 5-10', value: 'B. 5-10' },
+         { label: 'C. 10-20', value: 'C. 10-20' },
       ],
       image: images[Math.floor(Math.random() * images.length)],
    },
    {
       id: 2,
-      question: 'What is the number of Oxygen Kennel/Run outlets?',
+      question: 'How many oxygen Cages you use?',
       options: [
-         { label: '1 Outlet (5 lpm)', value: '1' },
-         { label: '2 Outlets (10 lpm)', value: '2' },
-         { label: '3 Outlets (15 lpm)', value: '3' },
+         { label: 'A. 1-5', value: 'A. 1-5' },
+         { label: 'B. 5-10', value: 'B. 5-10' },
+         { label: 'C. 10-15', value: 'C. 10-15' },
       ],
       image: images[Math.floor(Math.random() * images.length)],
    },
    {
       id: 3,
-      question: 'What is the number of Oxygen Imaging (X-Ray, CT, MRI, LINAC) outlets?',
+      question: 'How many oxygen door you use? ',
       options: [
-         { label: '3 Outlets (15 lpm)', value: '3' },
-         { label: '5 Outlets (25 lpm)', value: '5' },
-         { label: '10 Outlets (50 lpm)', value: '10' },
+         { label: 'A. 1-5', value: 'A. 1-5' },
+         { label: 'B. 5-10', value: 'B. 5-10' },
+         { label: 'C. 10-15', value: 'C. 10-15' },
       ],
       image: images[Math.floor(Math.random() * images.length)],
    },
    {
       id: 4,
-      question: 'How many outlets for Oxygen Treatment Area?',
+      question: 'Do you use ventilator?',
       options: [
-         { label: '1 Outlet (5 lpm)', value: '1' },
-         { label: '2 Outlets (10 lpm)', value: '2' },
-         { label: '3 Outlets (15 lpm)', value: '3' },
+         { label: 'A. Yes', value: 'A. Yes' },
+         { label: 'B. No', value: 'B. No' },
       ],
       image: images[Math.floor(Math.random() * images.length)],
    },
    {
       id: 5,
-      question: 'How many outlets for Oxygen Surgery?',
+      question: 'What is the flow rate?',
       options: [
-         { label: '3 Outlets (15 lpm)', value: '3' },
-         { label: '5 Outlets (25 lpm)', value: '5' },
-         { label: '6 Outlets (30 lpm)', value: '6' },
+         { label: 'A. 1-5 LPM', value: 'A. 1-5 LPM' },
+         { label: 'B. 5-10 LPM', value: 'B. 5-10 LPM' },
+         { label: 'C. 10-40 LPM', value: 'C. 10-40 LPM' },
+         { label: 'D. 40+ LPM', value: 'D. 40+ LPM' },
       ],
+
       image: images[Math.floor(Math.random() * images.length)],
    },
 ];

@@ -32,6 +32,10 @@ const CustomerInformation = () => {
       //   dispatch(updateCustomerInfo(formData));
    };
 
+   const handlePrevPage = () => {
+      navigate(-1);
+   };
+
    return (
       <MainContainer>
          <Container>
@@ -392,7 +396,7 @@ const CustomerInformation = () => {
             </Section>
 
             <ButtonGroup>
-               <Button>Prev</Button>
+               <Button onClick={handlePrevPage}>Prev</Button>
                <Button primary onClick={handleNext}>
                   Next
                </Button>

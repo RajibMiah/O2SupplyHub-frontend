@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaCreditCard } from 'react-icons/fa';
 import { IoArrowBack } from 'react-icons/io5';
@@ -155,6 +156,7 @@ const RenderContainer = styled.div`
 
 const CheckoutPage = () => {
    const [paymentMethod, setPaymentMethod] = useState('Card');
+   const navigate = useNavigate();
 
    const renderPaymentComponent = () => {
       switch (paymentMethod) {
@@ -170,7 +172,7 @@ const CheckoutPage = () => {
    };
 
    const onBack = () => {
-      console.log('Go back');
+      navigate(-1);
    };
 
    return (

@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { setResultPage } from '@redux/slices/selectionSlice';
 import { useState } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
+
 import {
    ResultContainer,
    ImageContainer,
@@ -24,8 +25,7 @@ const ResultPage = () => {
    const increaseQuantity = () => setQuantity((prev) => prev + 1);
    const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
-   const handlePurchase = () => {
-      dispatch(setResultPage(false));
+   const handlePurchase = async () => {
       navigate('/customer-info');
    };
 

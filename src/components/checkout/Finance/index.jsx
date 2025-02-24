@@ -227,6 +227,10 @@ const SubmitButton = styled.button`
 `;
 
 const FinanceForm = () => {
+   const handleSubmit = () => {
+      alert('Form Submitted');
+   };
+
    return (
       <Container>
          <Header>
@@ -340,7 +344,9 @@ const FinanceForm = () => {
          </ContactSection>
 
          <SubmitButtonContainer>
-            <SubmitButton>Submit</SubmitButton>
+            <SubmitButton on onClick={handleSubmit}>
+               Submit
+            </SubmitButton>
          </SubmitButtonContainer>
       </Container>
    );

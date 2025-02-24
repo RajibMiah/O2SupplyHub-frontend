@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { setLoginModal, setSignupModal } from '@redux/slices/uiSlice';
 import { motion } from 'framer-motion';
 import {
@@ -17,6 +18,8 @@ import {
 
 const SignupModal = () => {
    const dispatch = useDispatch();
+   const navigate = useNavigate();
+
    const { signupModal } = useSelector((state) => state.ui);
    const [formData, setFormData] = useState({
       fullName: '',
@@ -40,6 +43,11 @@ const SignupModal = () => {
       console.log('Signup Data:', formData);
       dispatch(setSignupModal(false)); // Close modal after submit
    };
+
+   const handleCancel = () => {
+      dispatch(setSignupModal(false));
+      navigate('/');
+   };
    const handleRedirect = () => {
       dispatch(setSignupModal(false));
       dispatch(setLoginModal(true));
@@ -54,7 +62,7 @@ const SignupModal = () => {
                transition={{ duration: 0.3 }}
             >
                <ModalContainer>
-                  <CloseButton onClick={() => dispatch(setSignupModal(false))}>×</CloseButton>
+                  <CloseButton onClick={handleCancel}>×</CloseButton>
                   <h2>Sign Up</h2>
                   <form onSubmit={handleSubmit}>
                      <Label>Full Name</Label>

@@ -114,18 +114,33 @@ const selectionSlice = createSlice({
          console.log('Selected Generator:', selectedGenerator);
          state.selectedOxygenGen = selectedGenerator;
       },
-      setQuantity: (state, action) => {
-         const newQuantity = Math.max(1, action.payload); // Ensure at least 1
-         state.quantity = newQuantity;
-         state.selectedOxygenGen.priceMSRP = state.selectedOxygenGen.priceMSRP * newQuantity;
-         state.selectedOxygenGen.leaseWeekly = state.selectedOxygenGen.leaseWeekly * newQuantity;
-         state.selectedOxygenGen.leaseMonthly = state.selectedOxygenGen.leaseMonthly * newQuantity;
+      incrementPriceByQty: (state) => {
+         state.quantity += 1;
+         state.selectedOxygenGen.priceMSRP *= state.quantity;
+         state.selectedOxygenGen.leaseWeekly *= state.quantity;
+         state.selectedOxygenGen.leaseMonthly *= state.quantity;
+      },
+      decrementPriceByQty: (state) => {
+         if (state.quantity > 1) {
+            state.quantity -= 1;
+            state.selectedOxygenGen.priceMSRP /= state.quantity + 1;
+
+            state.selectedOxygenGen.leaseWeekly /= state.quantity + 1;
+
+            state.selectedOxygenGen.leaseMonthly /= state.quantity + 1;
+         }
       },
    },
 });
 
 // ✅ Export Redux Actions
-export const { setStep, setResultPage, setSelectedOptions, setQuantity } = selectionSlice.actions;
+export const {
+   setStep,
+   setResultPage,
+   setSelectedOptions,
+   incrementPriceByQty,
+   decrementPriceByQty,
+} = selectionSlice.actions;
 
 // // ✅ Export Selectors
 // export const selectQuantity = (state) => state.selection.quantity;

@@ -1,5 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setQuantity, setResultPage } from '@redux/slices/selectionSlice';
+import {
+   incrementPriceByQty,
+   decrementPriceByQty,
+   setResultPage,
+} from '@redux/slices/selectionSlice';
 
 import {
    ResultContainer,
@@ -52,7 +56,7 @@ const ResultPage = () => {
                <ResultBox>
                   <TitleWrapper>
                      <h3>
-                        <strong>Aura® 10 Nano</strong>
+                        <strong>{selectedOxygenGen.model}</strong>
                      </h3>
                      <RetailPrice>CAD ${selectedOxygenGen.priceMSRP.toFixed(2)}</RetailPrice>
                   </TitleWrapper>
@@ -74,9 +78,9 @@ const ResultPage = () => {
                   <QuantityContainer>
                      <p>Quantity</p>
                      <QuantitySelector>
-                        <button onClick={() => dispatch(setQuantity(quantity - 1))}>-</button>
+                        <button onClick={() => dispatch(decrementPriceByQty())}>-</button>
                         <span>{quantity}</span>
-                        <button onClick={() => dispatch(setQuantity(quantity + 1))}>+</button>
+                        <button onClick={() => dispatch(incrementPriceByQty())}>+</button>
                      </QuantitySelector>
                   </QuantityContainer>
                </ResultBox>

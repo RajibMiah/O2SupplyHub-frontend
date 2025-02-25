@@ -71,3 +71,33 @@ export const ProfileIcon = styled(FaUserCircle)`
    color: ${(props) => props.theme.textColor};
    cursor: pointer;
 `;
+
+export const MenuContainer = styled.div`
+   position: relative;
+`;
+
+export const ProfileMenu = styled.div`
+   position: absolute;
+   top: 50px;
+   right: 0;
+   background: white;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   border-radius: 8px;
+   width: 150px;
+   display: flex;
+   flex-direction: column;
+   padding: 10px;
+   z-index: 100;
+`;
+
+export const MenuItem = styled(Link)`
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 10px;
+   text-decoration: none;
+   color: #333;
+   &:hover {
+      background: #f1f1f1;
+   }
+`;

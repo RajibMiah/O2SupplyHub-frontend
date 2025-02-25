@@ -26,17 +26,28 @@ const Invoice = () => {
    const quantity = useSelector(selectQuantity);
    const totalRetailPrice = useSelector(selectTotalRetailPrice);
    // const totalLeasePrice = useSelector(selectTotalLeasePrice);
+
    const handlePrintDownload = () => {
       const printContent = document.getElementById('invoice-print').innerHTML;
-      const styles = document.head.innerHTML; // Extracts all styles applied to the page
+      const stylesheets = Array.from(document.styleSheets)
+         .map((sheet) => {
+            try {
+               return Array.from(sheet.cssRules)
+                  .map((rule) => rule.cssText)
+                  .join('');
+            } catch {
+               return ''; // Some stylesheets might be cross-origin and not accessible
+            }
+         })
+         .join('');
 
       const newWindow = window.open('', '_blank'); // Open new print window
       newWindow.document.write(`
       <html>
          <head>
             <title>Print Invoice</title>
-            ${styles}  <!-- Apply all styles from the original document -->
             <style>
+               ${stylesheets}  /* Inject all available styles */
                @media print {
                   body {
                      -webkit-print-color-adjust: exact !important;
@@ -54,12 +65,12 @@ const Invoice = () => {
       </html>
    `);
 
-      newWindow.document.close(); // Close document to apply styles
+      newWindow.document.close();
       newWindow.focus();
       setTimeout(() => {
          newWindow.print();
          newWindow.close();
-      }, 500); // Wait for styles to load before printing
+      }, 500);
    };
 
    return (

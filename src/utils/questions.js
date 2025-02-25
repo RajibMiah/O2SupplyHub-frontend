@@ -3,7 +3,7 @@ import image2 from '@assets/images/image2.jpg';
 import image3 from '@assets/images/image3.jpg';
 
 const images = [image1, image2, image3];
-console.log('images', images);
+
 export const questions = [
    {
       id: 1,

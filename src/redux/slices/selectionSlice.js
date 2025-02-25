@@ -1,43 +1,96 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// Base pricing
-const BASE_RETAIL_PRICE = 7428.75; // Retail price per OC
-const LEASE_MONTHLY_PRICE = 158.77; // Monthly lease per OC
-
 const initialState = {
    step: 0,
    resultPage: false,
    selectedOptions: {},
-   quantity: 1, // Default quantity (number of OCs)
-   totalRetailPrice: BASE_RETAIL_PRICE,
-   totalLeasePrice: LEASE_MONTHLY_PRICE,
-   recommendedOC: 1, // Default recommended Oxygen Concentrator count
+   quantity: 1,
+   selectedOxygenGen: {
+      model: '',
+      productDescription: '',
+      partNumber: '',
+      priceMSRP: 0,
+      leaseWeekly: 0,
+      leaseMonthly: 0,
+   },
 };
 
-// Function to calculate recommended OC based on user selections
-const calculateRecommendedOC = (selectedOptions) => {
-   let recommendedOC = 0;
+const selected_values = [
+   { name: 'Oxygen Exam/Comfort', qty: 1, flow_rate: 5, diversity_factor: 10 },
+   { name: 'Oxygen (Surgery)', qty: 5, flow_rate: 5, diversity_factor: 50 },
+   { name: 'Oxygen Cage (Specific)', qty: 2, flow_rate: 15, diversity_factor: 100 },
+   { name: 'Jet Ventilator', qty: 1, flow_rate: 25, diversity_factor: 100 },
+];
 
-   // **Anesthesia Machine Usage**
-   if (selectedOptions[0] === 'A.1-2') recommendedOC += 1;
-   if (selectedOptions[0] === 'B. 5-10') recommendedOC += 2;
-   if (selectedOptions[0] === 'C. 10-20') recommendedOC += 3;
+const oxygenGenerators = [
+   {
+      model: 'Aura® 10 Nano',
+      productDescription: '10LPM @ 50psi, 8 Gallon Storage tank, Oxygen (O2): 93% ± 3%',
+      partNumber: 'RA2801OC1V6506',
+      priceMSRP: 7428.75,
+      leaseWeekly: 34.29,
+      leaseMonthly: 156.77,
+   },
+   {
+      model: 'Aura® 10',
+      productDescription: '10LPM @ 50psi, 30 Gallon integrated Storage tank, Oxygen (O2): 93% ± 3%',
+      partNumber: 'RA2801OC4V6278',
+      priceMSRP: 22577.42,
+      leaseWeekly: 104.2,
+      leaseMonthly: 462.72,
+   },
+   {
+      model: 'Aura® 20',
+      productDescription: '20LPM @ 50psi, 30 Gallon integrated Storage tank, Oxygen (O2): 93% ± 3%',
+      partNumber: 'RA2801OC4V6200',
+      priceMSRP: 25273.07,
+      leaseWeekly: 116.64,
+      leaseMonthly: 518.01,
+   },
+   {
+      model: 'Aura® 40',
+      productDescription: '40LPM @ 50psi, 30 Gallon integrated Storage tank, Oxygen (O2): 93% ± 3%',
+      partNumber: 'RA2801OC8V6458',
+      priceMSRP: 42347.99,
+      leaseWeekly: 195.45,
+      leaseMonthly: 868.0,
+   },
+   {
+      model: 'Aura® 80',
+      productDescription: '80LPM @ 50psi, 80 Gallon Storage tank, Oxygen (O2): 93% ± 3%',
+      partNumber: 'RA2801OC8V6430',
+      priceMSRP: 57335.36,
+      leaseWeekly: 264.62,
+      leaseMonthly: 1159.05,
+   },
+];
 
-   // **Oxygen Cage Usage**
-   if (selectedOptions[1] === 'A. 1-5') recommendedOC += 1;
-   if (selectedOptions[1] === 'B. 5-10') recommendedOC += 2;
-   if (selectedOptions[1] === 'C. 10-15') recommendedOC += 3;
+const getPartNumber = (systemFlow) => {
+   if (systemFlow <= 10) {
+      return 'RA2801OC1V6506'; // Aura® 10 Nano
+   } else if (systemFlow <= 20) {
+      return 'RA2801OC4V6278'; // Aura® 10
+   } else if (systemFlow <= 40) {
+      return 'RA2801OC4V6200'; // Aura® 20
+   } else {
+      return 'RA2801OC8V6430'; // Aura® 80
+   }
+};
 
-   // **Ventilator Usage**
-   if (selectedOptions[3] === 'A. Yes') recommendedOC += 1;
+const calculateSystemFlow = (selected_values) => {
+   let totalSystemFlow = 0;
+   let results = [];
 
-   // **Flow Rate Adjustment**
-   if (selectedOptions[4] === 'A. 1-5 LPM') recommendedOC += 0;
-   if (selectedOptions[4] === 'B. 5-10 LPM') recommendedOC += 1;
-   if (selectedOptions[4] === 'C. 10-40 LPM') recommendedOC += 2;
-   if (selectedOptions[4] === 'D. 40+ LPM') recommendedOC += 3;
+   selected_values.forEach((item) => {
+      let systemFlow = item.qty * item.flow_rate * (item.diversity_factor / 100);
+      results.push({ Outlet: item.name, 'System Flow (lpm)': systemFlow });
+      totalSystemFlow += systemFlow;
+   });
 
-   return Math.max(1, recommendedOC); // Ensure at least 1 OC
+   console.table(results);
+   console.log('Total System Flow (lpm):', totalSystemFlow);
+
+   return totalSystemFlow;
 };
 
 const selectionSlice = createSlice({
@@ -52,15 +105,21 @@ const selectionSlice = createSlice({
       },
       setSelectedOptions: (state, action) => {
          state.selectedOptions = { ...state.selectedOptions, ...action.payload };
-         state.recommendedOC = calculateRecommendedOC(state.selectedOptions);
-         state.totalRetailPrice = state.recommendedOC * BASE_RETAIL_PRICE;
-         state.totalLeasePrice = state.recommendedOC * LEASE_MONTHLY_PRICE;
+         const system_flow = calculateSystemFlow(selected_values);
+         const part_number = getPartNumber(system_flow);
+         const selectedGenerator = oxygenGenerators.find(
+            (generator) => generator.partNumber === part_number
+         );
+
+         console.log('Selected Generator:', selectedGenerator);
+         state.selectedOxygenGen = selectedGenerator;
       },
       setQuantity: (state, action) => {
          const newQuantity = Math.max(1, action.payload); // Ensure at least 1
          state.quantity = newQuantity;
-         state.totalRetailPrice = newQuantity * BASE_RETAIL_PRICE;
-         state.totalLeasePrice = newQuantity * LEASE_MONTHLY_PRICE;
+         state.selectedOxygenGen.priceMSRP = state.selectedOxygenGen.priceMSRP * newQuantity;
+         state.selectedOxygenGen.leaseWeekly = state.selectedOxygenGen.leaseWeekly * newQuantity;
+         state.selectedOxygenGen.leaseMonthly = state.selectedOxygenGen.leaseMonthly * newQuantity;
       },
    },
 });
@@ -68,12 +127,12 @@ const selectionSlice = createSlice({
 // ✅ Export Redux Actions
 export const { setStep, setResultPage, setSelectedOptions, setQuantity } = selectionSlice.actions;
 
-// ✅ Export Selectors
-export const selectQuantity = (state) => state.selection.quantity;
-export const selectSelectedOptions = (state) => state.selection.selectedOptions;
-export const selectRecommendedOC = (state) => state.selection.recommendedOC;
-export const selectTotalRetailPrice = (state) => state.selection.totalRetailPrice;
-export const selectTotalLeasePrice = (state) => state.selection.totalLeasePrice;
+// // ✅ Export Selectors
+// export const selectQuantity = (state) => state.selection.quantity;
+// export const selectSelectedOptions = (state) => state.selection.selectedOptions;
+// export const selectRecommendedOC = (state) => state.selection.recommendedOC;
+// export const selectTotalRetailPrice = (state) => state.selection.totalRetailPrice;
+// export const selectTotalLeasePrice = (state) => state.selection.totalLeasePrice;
 
 // ✅ Export Reducer
 export default selectionSlice.reducer;

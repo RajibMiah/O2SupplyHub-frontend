@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setResultPage } from '@redux/slices/selectionSlice';
+import { setQuantity, setResultPage } from '@redux/slices/selectionSlice';
 
 import {
    ResultContainer,
@@ -23,12 +23,6 @@ import {
 } from '@styles/selectionStyle';
 
 import { useNavigate } from 'react-router-dom';
-import {
-   setQuantity,
-   selectQuantity,
-   selectTotalRetailPrice,
-   selectTotalLeasePrice,
-} from '@redux/slices/selectionSlice';
 
 import image1 from '@assets/images/image1.jpg';
 import { FaCheckCircle } from 'react-icons/fa';
@@ -36,10 +30,8 @@ import { FaCheckCircle } from 'react-icons/fa';
 const ResultPage = () => {
    const dispatch = useDispatch();
    const navigate = useNavigate();
-   const quantity = useSelector(selectQuantity);
 
-   const totalRetailPrice = useSelector(selectTotalRetailPrice);
-   const totalLeasePrice = useSelector(selectTotalLeasePrice);
+   const { quantity, selectedOxygenGen } = useSelector((state) => state.selection);
 
    const handlePurchase = async () => {
       navigate('/customer-info');
@@ -62,7 +54,7 @@ const ResultPage = () => {
                      <h3>
                         <strong>Aura® 10 Nano</strong>
                      </h3>
-                     <RetailPrice>CAD ${totalRetailPrice.toFixed(2)}</RetailPrice>
+                     <RetailPrice>CAD ${selectedOxygenGen.priceMSRP.toFixed(2)}</RetailPrice>
                   </TitleWrapper>
 
                   <OrText>Or</OrText>
@@ -70,7 +62,11 @@ const ResultPage = () => {
                   <PriceWrapper>
                      <LeasePrice>
                         <span>5 Year Monthly Lease Plan</span>
-                        <span>CAD ${totalLeasePrice.toFixed(2)}</span>
+                        <span>CAD ${selectedOxygenGen.leaseMonthly.toFixed(2)}</span>
+                     </LeasePrice>
+                     <LeasePrice>
+                        <span>5 Year weekly Lease Plan</span>
+                        <span>CAD ${selectedOxygenGen.leaseWeekly.toFixed(2)}</span>
                      </LeasePrice>
                   </PriceWrapper>
 

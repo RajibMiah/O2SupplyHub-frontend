@@ -9,31 +9,31 @@ const CustomerContactInfo = ({ errors, formData, handleInputChange }) => {
          <Grid>
             <div>
                <InputField
-                  placeholder="Facility Name"
-                  name="customer.contact.facilityName"
-                  value={formData?.customer?.contact?.facilityName}
+                  placeholder="Title"
+                  name="customer.contact.title"
+                  value={formData?.customer?.contact?.title}
                   onChange={handleInputChange}
                />
-               {errors?.['customer.contact.facilityName'] && (
-                  <ErrorMessage>{errors['customer.contact.facilityName']}</ErrorMessage>
+               {errors?.['customer.contact.title'] && (
+                  <ErrorMessage>{errors['customer.contact.title']}</ErrorMessage>
                )}
             </div>
 
             <div>
                <InputField
-                  placeholder="Street Address"
-                  name="customer.contact.streetAddress"
-                  value={formData?.customer?.contact?.streetAddress}
+                  placeholder="Name"
+                  name="customer.contact.name"
+                  value={formData?.customer?.contact?.name}
                   onChange={handleInputChange}
                />
-               {errors?.['customer.contact.streetAddress'] && (
-                  <ErrorMessage>{errors['customer.contact.streetAddress']}</ErrorMessage>
+               {errors?.['customer.contact.name'] && (
+                  <ErrorMessage>{errors['customer.contact.name']}</ErrorMessage>
                )}
             </div>
 
-            <div>
+            {/* <div>
                <InputField
-                  placeholder="City"
+                  placeholder="Phone number"
                   name="customer.contact.city"
                   value={formData?.customer?.contact?.city}
                   onChange={handleInputChange}
@@ -102,19 +102,31 @@ const CustomerContactInfo = ({ errors, formData, handleInputChange }) => {
                {errors?.['customer.contact.receivingType'] && (
                   <ErrorMessage>{errors['customer.contact.receivingType']}</ErrorMessage>
                )}
-            </div>
+            </div> */}
          </Grid>
-
          <InlineGrid>
             <div>
                <InputField
-                  placeholder="Receiving Hours of Operation"
-                  name="customer.contact.receivingHours"
-                  value={formData?.customer?.contact?.receivingHours}
+                  placeholder="Phone number"
+                  name="customer.contact.phone"
+                  value={formData?.customer?.contact?.phone}
                   onChange={handleInputChange}
                />
-               {errors?.['customer.contact.receivingHours'] && (
-                  <ErrorMessage>{errors['customer.contact.receivingHours']}</ErrorMessage>
+               {errors?.['customer.contact.phone'] && (
+                  <ErrorMessage>{errors['customer.contact.phone']}</ErrorMessage>
+               )}
+            </div>
+         </InlineGrid>
+         <InlineGrid>
+            <div>
+               <InputField
+                  placeholder="Email address"
+                  name="customer.contact.email"
+                  value={formData?.customer?.contact?.email}
+                  onChange={handleInputChange}
+               />
+               {errors?.['customer.contact.email'] && (
+                  <ErrorMessage>{errors['customer.contact.email']}</ErrorMessage>
                )}
             </div>
          </InlineGrid>
@@ -127,15 +139,10 @@ CustomerContactInfo.propTypes = {
    formData: PropTypes.shape({
       customer: PropTypes.shape({
          contact: PropTypes.shape({
-            facilityName: PropTypes.string,
-            streetAddress: PropTypes.string,
-            city: PropTypes.string,
-            state: PropTypes.string,
-            zip: PropTypes.string,
-            country: PropTypes.string,
-            taxId: PropTypes.string,
-            receivingType: PropTypes.string,
-            receivingHours: PropTypes.string,
+            title: PropTypes.string,
+            name: PropTypes.string,
+            phone: PropTypes.string,
+            email: PropTypes.string,
          }),
       }),
    }).isRequired,

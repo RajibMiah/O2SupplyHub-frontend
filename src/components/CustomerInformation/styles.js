@@ -49,7 +49,7 @@ export const Grid = styled.div`
 `;
 
 export const InlineGrid = styled(Grid)`
-   padding: 18px 0;
+   // padding: 18px 0;
    grid: none;
 `;
 export const CheckboxContainer = styled.div`

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Input = styled.input`
    width: 100%;
-   padding: 14px;
+   padding: 17px;
    border: 1px solid #ddd;
    border-radius: 5px;
    font-size: 14px;

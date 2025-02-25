@@ -1,6 +1,5 @@
 import CompanyLogo from '@/assets/logo.svg';
 import { useSelector } from 'react-redux';
-import { selectQuantity, selectTotalRetailPrice } from '@redux/slices/selectionSlice';
 import {
    Cotainer,
    InvoiceContainer,
@@ -23,8 +22,7 @@ import {
 } from './styles';
 
 const Invoice = () => {
-   const quantity = useSelector(selectQuantity);
-   const totalRetailPrice = useSelector(selectTotalRetailPrice);
+   const { quantity, selectedOxygenGen } = useSelector((state) => state.selection);
    // const totalLeasePrice = useSelector(selectTotalLeasePrice);
 
    const handlePrintDownload = () => {
@@ -97,13 +95,26 @@ const Invoice = () => {
                      <p>Email: abc@gmail.com</p>
                   </BillTo>
 
-                  {/* Invoice Dates */}
                   <InvoiceDates>
                      <p>
-                        Issued on: <strong>December 7, 2022</strong>
+                        Issued on:{' '}
+                        <strong>
+                           {new Date().toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric',
+                           })}
+                        </strong>
                      </p>
                      <p>
-                        Payment Due: <strong>December 22, 2022</strong>
+                        Payment Due:{' '}
+                        <strong>
+                           {new Date().toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric',
+                           })}
+                        </strong>
                      </p>
                   </InvoiceDates>
                </BilingDetails>
@@ -121,10 +132,10 @@ const Invoice = () => {
             </thead>
             <tbody>
                <tr>
-                  <td>Aura® 10 Nano</td>
+                  <td>{selectedOxygenGen.model}</td>
                   <td>{quantity}</td>
-                  <td>CAD $7,428.75</td>
-                  <td>CAD ${totalRetailPrice.toFixed(2)}</td>
+                  <td>CAD ${selectedOxygenGen.leaseMonthly.toFixed(2)}</td>
+                  <td>CAD ${selectedOxygenGen.leaseWeekly.toFixed(2)}</td>
                </tr>
             </tbody>
          </Table>
@@ -133,7 +144,7 @@ const Invoice = () => {
          <TotalContainer>
             <Total>
                <span>Total (CAD)</span>
-               <span>${totalRetailPrice.toFixed(2)}</span>
+               <span>${selectedOxygenGen.priceMSRP.toFixed(2)}</span>
             </Total>
          </TotalContainer>
 

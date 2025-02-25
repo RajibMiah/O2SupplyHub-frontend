@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const useCustomerForm = () => {
    const [formData, setFormData] = useState({
@@ -9,15 +9,10 @@ const useCustomerForm = () => {
          preparedBy: '',
          location: '',
          contact: {
-            facilityName: '',
-            streetAddress: '',
-            city: '',
-            state: '',
-            zip: '',
-            country: '',
-            taxId: '',
-            receivingType: '',
-            receivingHours: '',
+            title: '',
+            name: '',
+            phone: '',
+            email: '',
          },
       },
       billing: {
@@ -52,7 +47,7 @@ const useCustomerForm = () => {
    });
 
    const [errors, setErrors] = useState({});
-   const [isFormFilled, setIsFormFilled] = useState(false);
+   // const [isFormFilled, setIsFormFilled] = useState(false);
 
    // ✅ Handle Input Change & Remove Errors
    const handleInputChange = (e) => {
@@ -119,19 +114,19 @@ const useCustomerForm = () => {
       return Object.keys(newErrors).length === 0;
    };
 
-   useEffect(() => {
-      const isFilled = (obj) => {
-         return Object.values(obj).every((value) => {
-            if (typeof value === 'object' && value !== null) {
-               return isFilled(value); // Recursively check nested objects
-            }
-            return value !== '' && value !== null && value !== undefined;
-         });
-      };
+   // useEffect(() => {
+   //    const isFilled = (obj) => {
+   //       return Object.values(obj).every((value) => {
+   //          if (typeof value === 'object' && value !== null) {
+   //             return isFilled(value); // Recursively check nested objects
+   //          }
+   //          return value !== '' && value !== null && value !== undefined;
+   //       });
+   //    };
 
-      setIsFormFilled(isFilled(formData));
-      console.log('is filled', isFormFilled);
-   }, [formData, isFormFilled]);
+   //    setIsFormFilled(isFilled(formData));
+   //    console.log('is filled', isFormFilled);
+   // }, [formData, isFormFilled]);
 
    return {
       formData,
@@ -139,7 +134,7 @@ const useCustomerForm = () => {
       handleToggleShipping, // ✅ Return Toggle Function
       validateForm,
       errors,
-      isFormFilled,
+      // isFormFilled,
    };
 };
 

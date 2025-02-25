@@ -1,10 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+const url = import.meta.env.VITE_API_URL;
+
 export const submitCustomerInfo = createAsyncThunk(
    'customer/submitCustomerInfo',
    async (customerData, { rejectWithValue }) => {
       try {
-         const response = await fetch('https://your-api-endpoint.com/customer', {
+         const response = await fetch(`${url}/customer/info`, {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',

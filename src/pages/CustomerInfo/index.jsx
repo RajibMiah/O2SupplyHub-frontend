@@ -14,24 +14,30 @@ import {
    MainContainer,
    Section,
 } from '@/components/CustomerInformation/styles';
+import { submitCustomerInfo } from '@redux/thunks/customerInfo';
 import ContractInformation from '@/components/CustomerInformation/ContractInfo';
 import CustomerContactInfo from '@/components/CustomerInformation/CustomerContactInfo';
 import CustomerBilingInfo from '@/components/CustomerInformation/CustomerBilingInfo';
+import { useDispatch } from 'react-redux';
+import { setRegistertion } from '@/redux/slices/authSlice';
 
 const CustomerInformation = () => {
-   //    const dispatch = useDispatch();
+   const dispatch = useDispatch();
    const navigate = useNavigate();
    const { formData, handleInputChange, handleToggleShipping, errors, validateForm } =
       useCustomerForm();
 
-   const handleNext = () => {
+   const handleNext = async () => {
       if (!validateForm()) {
          return;
       }
 
-      console.log('Submitted Form Data:', formData); // ✅ Logs the data in console
-
-      navigate('/checkout');
+      console.log('Submitted Form Data:', formData);
+      const { meta, payload } = await dispatch(submitCustomerInfo(formData));
+      if (meta.requestStatus === 'fulfilled') {
+         dispatch(setRegistertion(payload));
+         navigate('/checkout');
+      }
    };
 
    const handlePrevPage = () => {

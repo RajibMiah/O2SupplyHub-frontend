@@ -18,13 +18,20 @@ export const submitFinanceForm = createAsyncThunk(
             body: JSON.stringify(financeData),
          });
 
-         if (!response.ok) {
-            throw new Error('Failed to submit finance form');
+         console.log('🔍 Response Status:', response.status);
+
+         // Parse JSON response
+         const data = await response.json();
+
+         // If API sends { success: false }, handle rejection
+         if (data.success === false) {
+            return rejectWithValue(data.message || 'Submission failed');
          }
 
-         return await response.json();
+         return data;
       } catch (error) {
-         return rejectWithValue(error.message);
+         console.error('❌ Error Submitting Finance Form:', error);
+         return rejectWithValue(error.message || 'Something went wrong');
       }
    }
 );

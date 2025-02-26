@@ -80,16 +80,21 @@ const FinanceForm = () => {
       return Object.keys(newErrors).length === 0;
    };
 
-   // Handle Form Submission
-   const handleSubmit = () => {
-      if (validateForm()) {
-         console.log('📌 Form Submitted Data:', formData);
-         const { meta, payload } = dispatch(submitFinanceForm());
-         if (meta.requestStatus === 'fulfilled') {
-            alert(`${payload}`);
-         } else {
-            alert('Something went wrong!');
-         }
+   const handleSubmit = async () => {
+      if (!validateForm()) {
+         return;
+      }
+
+      console.log('📌 Form Submitted Data:', formData);
+
+      const { meta, payload } = await dispatch(submitFinanceForm(formData));
+
+      console.log('meta:', meta, 'payload:', payload); // Debugging
+
+      if (meta.requestStatus === 'fulfilled') {
+         alert(`✅ Form submitted successfully! Thank you.`);
+      } else {
+         alert(`❌ Error: ${payload || 'Something went wrong!'}`);
       }
    };
 

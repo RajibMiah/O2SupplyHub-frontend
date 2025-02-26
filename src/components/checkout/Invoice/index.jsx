@@ -1,5 +1,5 @@
-import CompanyLogo from '@/assets/logo.svg';
 import { useSelector } from 'react-redux';
+import CompanyLogo from '@/assets/logo.svg';
 import {
    Cotainer,
    InvoiceContainer,
@@ -22,8 +22,16 @@ import {
 } from './styles';
 
 const Invoice = () => {
+   // ✅ Get user details from Redux store
+   const user = useSelector((state) => state.auth.user);
+
+   // ✅ Get invoice-related selection data
    const { quantity, selectedOxygenGen } = useSelector((state) => state.selection);
-   // const totalLeasePrice = useSelector(selectTotalLeasePrice);
+
+   // ✅ Handle empty user state
+   if (!user) {
+      return <p>Loading user data...</p>;
+   }
 
    const handlePrintDownload = () => {
       const printContent = document.getElementById('invoice-print').innerHTML;
@@ -86,13 +94,13 @@ const Invoice = () => {
             <BillSection>
                <BillingHeader>
                   <p>Billed To:</p>
-                  <strong>Client Name</strong>
+                  <strong>{user.contact.name || 'Client Name'}</strong>
                </BillingHeader>
                <BilingDetails>
                   <BillTo>
-                     <p>123 Maplewood Lane, Toronto, ON M5V 1A1, Canada</p>
-                     <p>Phone: 01xxxxxx</p>
-                     <p>Email: abc@gmail.com</p>
+                     <p>{user.location || '123 Maplewood Lane, Toronto, ON M5V 1A1, Canada'}</p>
+                     <p>Phone: {user.contact?.phone || '01xxxxxx'}</p>
+                     <p>Email: {user.contact?.email || 'abc@gmail.com'}</p>
                   </BillTo>
 
                   <InvoiceDates>
@@ -120,6 +128,7 @@ const Invoice = () => {
                </BilingDetails>
             </BillSection>
          </InvoiceContainer>
+
          {/* Products Table */}
          <Table>
             <thead>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { submitCustomerInfo } from '@redux/thunks/customerInfo';
-import { setAuthentication } from '@/redux/slices/authSlice';
+import { setAuthentication, setProfile } from '@/redux/slices/authSlice';
 
 import {
    Button,
@@ -33,13 +33,18 @@ const CustomerInformation = () => {
       }
 
       console.log('Submitting Form Data:', formData);
+      const { customer } = formData;
+
       const { meta, payload } = await dispatch(submitCustomerInfo(formData));
 
+      console.log('meta ', meta, 'payload', payload);
+
       if (meta.requestStatus === 'fulfilled') {
+         dispatch(setProfile(customer));
          dispatch(setAuthentication(payload));
 
          navigate('/checkout');
-      } else {
+      } else if (meta.requestStatus === 'rejected') {
          alert('something went wrong!!');
       }
    };

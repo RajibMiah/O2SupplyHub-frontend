@@ -15,21 +15,26 @@ export const submitCustomerInfo = createAsyncThunk(
             body: JSON.stringify(customerData),
          });
 
+         // Check if HTTP response status is OK
          if (!response.ok) {
             throw new Error('Failed to submit customer information');
          }
 
-         // Parse response
-         const data = await response.json();
+         const data = await response.json(); // ✅ Parse once
 
-         // Store token in localStorage
+         // If API returns { success: false }, consider it an error
+         if (data.success === false) {
+            throw new Error(data.message || 'Submission failed');
+         }
+
+         // Store token if present
          if (data.token) {
             localStorage.setItem('authToken', data.token);
          }
 
-         // Return necessary data
-         return response.json();
+         return data; // ✅ Return the parsed response correctly
       } catch (error) {
+         console.error('Submit Customer Error:', error);
          return rejectWithValue(error.message);
       }
    }

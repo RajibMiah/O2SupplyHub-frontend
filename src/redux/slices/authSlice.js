@@ -21,9 +21,12 @@ const authSlice = createSlice({
       },
 
       setAuthentication: (state, action) => {
-         state.user = action.payload.user;
          state.token = action.payload.token;
          state.isAuthenticated = !!action.payload.token;
+      },
+      setProfile: (state, action) => {
+         console.log('set user profile', action.payload);
+         state.user = action.payload;
       },
    },
    extraReducers: (builder) => {
@@ -63,5 +66,5 @@ const authSlice = createSlice({
    },
 });
 
-export const { logout, setAuthentication } = authSlice.actions;
+export const { logout, setAuthentication, setProfile } = authSlice.actions;
 export default authSlice.reducer;

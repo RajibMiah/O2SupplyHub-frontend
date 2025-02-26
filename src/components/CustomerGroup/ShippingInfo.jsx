@@ -1,5 +1,5 @@
 import InputField from '@/components/InputField';
-import SectionWrapper from '@components/CustomerInformation/SelectionWrapper';
+import SectionWrapper from '@/components/CustomerGroup/SelectionWrapper';
 import PropTypes from 'prop-types';
 
 const ShippingInformation = ({ formData, handleInputChange }) => {

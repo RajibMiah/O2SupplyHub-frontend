@@ -31,6 +31,7 @@ export const LogoContainer = styled(Link)`
 `;
 
 export const Logo = styled.img`
+   width: 5rem;
    font-size: 1.5rem;
    font-weight: bold;
    color: ${(props) => props.theme.textColor};

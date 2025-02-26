@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store, persistor } from '@redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import ThemeProviderWrapper from '@/context/ThemeContext'; // Import ThemeProvider
+import ThemeProviderWrapper from '@/context/ThemeContext';
 import LoginModal from '@/components/LoginModel';
 import SignupModal from '@/components/SignupModel';
 

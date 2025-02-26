@@ -13,7 +13,7 @@ import {
    Layout,
 } from '@styles/selectionStyle';
 
-import Slider from '@/components/slider';
+import Slider from '@/components/Slider';
 import image1 from '@assets/images/image1.jpg';
 
 const MIN_QTY = 0;

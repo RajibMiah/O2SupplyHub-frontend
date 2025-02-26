@@ -87,6 +87,8 @@ const FinanceForm = () => {
          const { meta, payload } = dispatch(submitFinanceForm());
          if (meta.requestStatus === 'fulfilled') {
             alert(`${payload}`);
+         } else {
+            alert('Something went wrong!');
          }
       }
    };
@@ -170,7 +172,7 @@ const FinanceForm = () => {
                   value={formData.owner1Signature}
                   onChange={handleInputChange}
                />
-               <span>Owner (1) Signature / Date:</span>
+               <span>Type you full name</span>
                {errors.owner1Signature && <ErrorMessage>{errors.owner1Signature}</ErrorMessage>}
             </SignatureBox>
             <SignatureBox>
@@ -181,7 +183,7 @@ const FinanceForm = () => {
                   value={formData.owner2Signature}
                   onChange={handleInputChange}
                />
-               <span>Owner (2) Signature / Date:</span>
+               <span>Type you full name</span>
                {errors.owner2Signature && <ErrorMessage>{errors.owner2Signature}</ErrorMessage>}
             </SignatureBox>
          </SignatureSection>

@@ -6,10 +6,14 @@ export const submitFinanceForm = createAsyncThunk(
    'finance/submitFinanceForm',
    async (financeData, { rejectWithValue }) => {
       try {
+         // Retrieve token from localStorage
+         const token = localStorage.getItem('authToken');
+
          const response = await fetch(`${url}/customer/finance-form`, {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
+               Authorization: `Bearer ${token}`, // Attach token here
             },
             body: JSON.stringify(financeData),
          });

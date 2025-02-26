@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setLoginModal, setSignupModal } from '@redux/slices/uiSlice';
-import { login } from '@redux/slices/authSlice';
 import { motion } from 'framer-motion';
 import {
    ModalOverlay,
@@ -18,6 +17,7 @@ import {
    RememberContainer,
    ForgetLink,
 } from './styles';
+import { loginUser } from '@/redux/thunks/auth';
 
 const LoginModal = () => {
    const dispatch = useDispatch();
@@ -42,10 +42,7 @@ const LoginModal = () => {
    const handleSubmit = (e) => {
       e.preventDefault();
 
-      console.log('Login Data:', formData);
-      //FALSE LOGIN
-
-      dispatch(login());
+      dispatch(loginUser(formData));
 
       dispatch(setLoginModal(false)); // Close modal after submit
    };

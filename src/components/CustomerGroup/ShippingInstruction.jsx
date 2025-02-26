@@ -1,5 +1,5 @@
 import CheckboxGroup from '@/components/CheckboxGroup';
-import SectionWrapper from '@components/CustomerInformation/SelectionWrapper';
+import SectionWrapper from '@/components/CustomerGroup/SelectionWrapper';
 import PropTypes from 'prop-types';
 
 const ShippingInstructions = ({ formData, handleInputChange }) => {

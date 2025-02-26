@@ -15,6 +15,7 @@ import {
    PasswordContainer,
    TogglePassword,
 } from './styles';
+import { registerUser } from '@/redux/thunks/auth';
 
 const SignupModal = () => {
    const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const SignupModal = () => {
    const handleSubmit = (e) => {
       e.preventDefault();
       console.log('Signup Data:', formData);
+      dispatch(registerUser(formData));
       dispatch(setSignupModal(false)); // Close modal after submit
    };
 

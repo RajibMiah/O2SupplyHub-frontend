@@ -3,9 +3,9 @@ import Profile from '@pages/profile';
 import CylinderSelection from '@pages/selection';
 import NotFound from './pages/NotFound';
 import ProtectedRoute from '@components/ProtectedRoute';
-import CustomerInfo from '@pages/CustomerInfo';
-import Checkout from '@pages/Checkout';
-import CheckoutComplete from '@pages/Checkout/checkout-complete';
+import CustomerInfo from '@/pages/customer-info';
+import Checkout from '@/pages/checkout';
+import CheckoutComplete from '@/pages/checkout/checkout-complete';
 
 const App = () => {
    return (

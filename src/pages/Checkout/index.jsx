@@ -160,7 +160,7 @@ const CheckoutPage = () => {
 
    const renderPaymentComponent = () => {
       switch (paymentMethod) {
-         case 'Invoice':
+         case 'ECH':
             return <InvoiceComponent />;
          case 'Finance':
             return <FinanceForm />;
@@ -186,7 +186,7 @@ const CheckoutPage = () => {
                <IconWrapper>
                   <FaCreditCard size={30} color="#0d928d" />
                </IconWrapper>
-               <Title>Payment</Title>
+               <Title>Payment Methods</Title>
                <Line />
                <Label>Pay with:</Label>
                <Options>
@@ -194,8 +194,8 @@ const CheckoutPage = () => {
                      <input
                         type="radio"
                         name="paymentMethod"
-                        value="Invoice"
-                        checked={paymentMethod === 'Invoice'}
+                        value="ECH"
+                        checked={paymentMethod === 'ECH'}
                         onChange={(e) => setPaymentMethod(e.target.value)}
                      />
                      Invoice

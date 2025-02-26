@@ -24,10 +24,12 @@ import {
    InputWrapper,
    ErrorMessage,
 } from './styles';
-
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { submitFinanceForm } from '@/redux/thunks/financeForm';
 
 const FinanceForm = () => {
+   const dispatch = useDispatch();
    const [formData, setFormData] = useState({
       businessName: '',
       taxId: '',
@@ -82,7 +84,10 @@ const FinanceForm = () => {
    const handleSubmit = () => {
       if (validateForm()) {
          console.log('📌 Form Submitted Data:', formData);
-         alert('✅ Form Submitted. Check console for data.');
+         const { meta, payload } = dispatch(submitFinanceForm());
+         if (meta.requestStatus === 'fulfilled') {
+            alert(`${payload}`);
+         }
       }
    };
 

@@ -15,13 +15,6 @@ const initialState = {
    },
 };
 
-const selected_values = [
-   { name: 'Oxygen Exam/Comfort', qty: 1, flow_rate: 5, diversity_factor: 10 },
-   { name: 'Oxygen (Surgery)', qty: 5, flow_rate: 5, diversity_factor: 50 },
-   { name: 'Oxygen Cage (Specific)', qty: 2, flow_rate: 15, diversity_factor: 100 },
-   { name: 'Jet Ventilator', qty: 1, flow_rate: 25, diversity_factor: 100 },
-];
-
 const oxygenGenerators = [
    {
       model: 'Aura® 10 Nano',
@@ -104,9 +97,13 @@ const selectionSlice = createSlice({
          state.resultPage = action.payload;
       },
       setSelectedOptions: (state, action) => {
-         state.selectedOptions = { ...state.selectedOptions, ...action.payload };
-         const system_flow = calculateSystemFlow(selected_values);
+         const updatedOptions = { ...state.selectedOptions, ...action.payload };
+         state.selectedOptions = updatedOptions;
+
+         const system_flow = calculateSystemFlow(Object.values(updatedOptions)); // Pass array
+         console.log('system flow: ', system_flow);
          const part_number = getPartNumber(system_flow);
+         console.log('part number', part_number);
          const selectedGenerator = oxygenGenerators.find(
             (generator) => generator.partNumber === part_number
          );
@@ -114,6 +111,7 @@ const selectionSlice = createSlice({
          console.log('Selected Generator:', selectedGenerator);
          state.selectedOxygenGen = selectedGenerator;
       },
+
       incrementPriceByQty: (state) => {
          state.quantity += 1;
          state.selectedOxygenGen.priceMSRP *= state.quantity;

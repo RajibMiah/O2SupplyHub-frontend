@@ -28,7 +28,7 @@ const QuestionStep = ({ questions }) => {
       currentQuestion,
       value,
       isJetVentilator,
-      isJetVentilatorSelected,
+      isVentilatorSelected,
       handleChange,
       handleIncrement,
       handleDecrement,
@@ -61,19 +61,19 @@ const QuestionStep = ({ questions }) => {
                         <>
                            <ButtonGroup>
                               <Button
-                                 primary={isJetVentilatorSelected}
+                                 primary={isVentilatorSelected}
                                  onClick={() => handleJetVentilatorSelection('Yes')}
                               >
                                  Yes
                               </Button>
                               <Button
-                                 primary={!isJetVentilatorSelected}
+                                 primary={!isVentilatorSelected}
                                  onClick={() => handleJetVentilatorSelection('No')}
                               >
                                  No
                               </Button>
                            </ButtonGroup>
-                           {isJetVentilatorSelected && (
+                           {isVentilatorSelected && (
                               <>
                                  <NumberDisplay>{value} LPM</NumberDisplay>
                                  <Slider

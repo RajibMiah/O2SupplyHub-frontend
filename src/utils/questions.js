@@ -6,31 +6,39 @@
 
 export const questions = [
    {
-      id: 1,
+      id: 0,
       question: 'How many anesthesia machine you use? ',
       qty: 0,
       flow_rate: 5,
       diversity_factor: 10,
    },
    {
-      id: 2,
+      id: 1,
       question: 'How many oxygen Cage you use?',
       qty: 0,
       flow_rate: 5,
       diversity_factor: 50,
    },
    {
-      id: 3,
+      id: 2,
       question: 'How many oxygen door you use? ',
       qty: 0,
       flow_rate: 15,
       diversity_factor: 100,
    },
    {
-      id: 4,
+      id: 3,
       question: 'Do you use ventilator?',
       qty: 1,
       flow_rate: 25,
       diversity_factor: 100,
    },
 ];
+
+export const jetVentilator = {
+   id: 3,
+   question: 'Do you use ventilator?',
+   qty: 1,
+   flow_rate: 25,
+   diversity_factor: 100,
+};

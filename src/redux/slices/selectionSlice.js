@@ -3,12 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
    step: 0,
    resultPage: false,
-   selectedOptions: {},
+   selectedOptions: [],
    quantity: 1,
+   isVentilatorSelected: false,
    selectedOxygenGen: {
       model: '',
       productDescription: '',
       partNumber: '',
+      totalPrice: 0,
       priceMSRP: 0,
       leaseWeekly: 0,
       leaseMonthly: 0,
@@ -79,8 +81,6 @@ const calculateSystemFlow = (selected_values) => {
       results.push({ Outlet: item.name, 'System Flow (lpm)': systemFlow });
       totalSystemFlow += systemFlow;
    });
-
-   console.table(results);
    console.log('Total System Flow (lpm):', totalSystemFlow);
 
    return totalSystemFlow;
@@ -97,31 +97,34 @@ const selectionSlice = createSlice({
          state.resultPage = action.payload;
       },
       setSelectedOptions: (state, action) => {
-         const updatedOptions = { ...state.selectedOptions, ...action.payload };
+         const updatedOptions = action.payload;
          state.selectedOptions = updatedOptions;
 
          const system_flow = calculateSystemFlow(Object.values(updatedOptions)); // Pass array
-         console.log('system flow: ', system_flow);
+
          const part_number = getPartNumber(system_flow);
-         console.log('part number', part_number);
          const selectedGenerator = oxygenGenerators.find(
             (generator) => generator.partNumber === part_number
          );
 
-         console.log('Selected Generator:', selectedGenerator);
+         state.selectedOxygenGen.totalPrice = selectedGenerator.priceMSRP;
          state.selectedOxygenGen = selectedGenerator;
+      },
+
+      setJetVentilatorUpdate: (state, action) => {
+         state.isVentilatorSelected = action.payload;
       },
 
       incrementPriceByQty: (state) => {
          state.quantity += 1;
-         state.selectedOxygenGen.priceMSRP *= state.quantity;
+         state.selectedOxygenGen.totalPrice *= state.quantity;
          state.selectedOxygenGen.leaseWeekly *= state.quantity;
          state.selectedOxygenGen.leaseMonthly *= state.quantity;
       },
       decrementPriceByQty: (state) => {
          if (state.quantity > 1) {
             state.quantity -= 1;
-            state.selectedOxygenGen.priceMSRP /= state.quantity + 1;
+            state.selectedOxygenGen.totalPrice /= state.quantity + 1;
 
             state.selectedOxygenGen.leaseWeekly /= state.quantity + 1;
 
@@ -136,6 +139,7 @@ export const {
    setStep,
    setResultPage,
    setSelectedOptions,
+   setJetVentilatorUpdate,
    incrementPriceByQty,
    decrementPriceByQty,
 } = selectionSlice.actions;

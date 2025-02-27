@@ -1,6 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { setStep, setSelectedOptions, setResultPage } from '@redux/slices/selectionSlice';
+import {
+   setStep,
+   setSelectedOptions,
+   setResultPage,
+   setJetVentilatorUpdate,
+} from '@redux/slices/selectionSlice';
 
 const MIN_QTY = 0;
 const MAX_QTY = 10;
@@ -11,14 +16,14 @@ const JET_VENTILATOR = 'Do you use ventilator?';
 
 const useQuestionLogic = (questions) => {
    const dispatch = useDispatch();
-   const { step, selectedOptions } = useSelector((state) => state.selection);
+   const { step, isVentilatorSelected, selectedOptions } = useSelector((state) => state.selection);
 
    const [dummyQuestions, setDummyQuestions] = useState([...questions]);
    const [direction, setDirection] = useState(1);
    const currentQuestion = dummyQuestions[step];
 
    const isJetVentilator = currentQuestion?.question === JET_VENTILATOR;
-   const isJetVentilatorSelected = selectedOptions[currentQuestion?.id]?.jetVentilator === 'Yes';
+   const [isJetVentilatorSelected] = useState(isVentilatorSelected);
 
    const [value, setValue] = useState(
       isJetVentilator && isJetVentilatorSelected
@@ -49,6 +54,7 @@ const useQuestionLogic = (questions) => {
       currentQuestion?.qty,
       isJetVentilator,
       isJetVentilatorSelected,
+      isVentilatorSelected,
    ]);
 
    const updateDummyQuestions = (id, updatedData) => {
@@ -72,7 +78,7 @@ const useQuestionLogic = (questions) => {
 
       const updatedData =
          isJetVentilator && isJetVentilatorSelected ? { flow_rate: newValue } : { qty: newValue };
-
+      console.log('question', currentQuestion);
       updateDummyQuestions(currentQuestion.id, updatedData);
    };
 
@@ -107,10 +113,23 @@ const useQuestionLogic = (questions) => {
    };
 
    const handleJetVentilatorSelection = (option) => {
-      updateDummyQuestions(currentQuestion.id, { jetVentilator: option });
-      dispatch(
-         setSelectedOptions({ [currentQuestion.id]: { ...currentQuestion, jetVentilator: option } })
-      );
+      const isSelected = option === 'Yes';
+      console.log('is selected', isSelected);
+      dispatch(setJetVentilatorUpdate(isSelected));
+
+      // // Define the Jet Ventilator question object
+      // const JET_VENTILATOR = {
+      //    id: 3,
+      //    question: 'Do you use ventilator?',
+      //    qty: 1,
+      //    flow_rate: 25,
+      //    diversity_factor: 100,
+      // };
+      // setDummyQuestions((prevQuestions) => {
+      //    return isSelected
+      //       ? [...prevQuestions.filter((q) => q.id !== JET_VENTILATOR.id), JET_VENTILATOR] // Add if not exists
+      //       : prevQuestions.filter((q) => q.id !== JET_VENTILATOR.id); // Remove if exists
+      // });
    };
 
    const handleNavigation = (newStep) => {
@@ -119,19 +138,22 @@ const useQuestionLogic = (questions) => {
    };
 
    const handleSubmit = () => {
-      const finalData = dummyQuestions.map((question) => {
+      let finalData = dummyQuestions.map((question) => {
          const selected = selectedOptions[question.id] || {};
          return {
             id: question.id,
             question: question.question,
             qty: selected.qty ?? question.qty,
-            flow_rate:
-               selected.jetVentilator === 'Yes'
-                  ? selected.flow_rate ?? question.flow_rate
-                  : question.flow_rate,
+            flow_rate: question.flow_rate,
             diversity_factor: question.diversity_factor,
          };
       });
+
+      // Remove Jet Ventilator question if isJetVentilatorSelected is false
+      console.log('is jet ventilator selected', isVentilatorSelected);
+      if (!isVentilatorSelected) {
+         finalData = finalData.filter((question) => question.id !== 3); // Assuming 3 is JET_VENTILATOR ID
+      }
 
       dispatch(setSelectedOptions(finalData));
       dispatch(setResultPage(true));
@@ -143,7 +165,7 @@ const useQuestionLogic = (questions) => {
       currentQuestion,
       value,
       isJetVentilator,
-      isJetVentilatorSelected,
+      isVentilatorSelected,
       handleChange,
       handleIncrement,
       handleDecrement,

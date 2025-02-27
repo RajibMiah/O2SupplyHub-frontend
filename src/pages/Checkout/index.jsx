@@ -198,7 +198,7 @@ const CheckoutPage = () => {
                         checked={paymentMethod === 'ECH'}
                         onChange={(e) => setPaymentMethod(e.target.value)}
                      />
-                     Invoice
+                     ECH
                   </RadioLabel>
                   <RadioLabel>
                      <input

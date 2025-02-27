@@ -143,8 +143,8 @@ const Invoice = () => {
                <tr>
                   <td>{selectedOxygenGen.model}</td>
                   <td>{quantity}</td>
-                  <td>CAD ${selectedOxygenGen.leaseMonthly.toFixed(2)}</td>
-                  <td>CAD ${selectedOxygenGen.leaseWeekly.toFixed(2)}</td>
+                  <td>CAD ${selectedOxygenGen.priceMSRP.toFixed(2)}</td>
+                  <td>CAD ${selectedOxygenGen.totalPrice.toFixed(2)}</td>
                </tr>
             </tbody>
          </Table>
@@ -153,7 +153,7 @@ const Invoice = () => {
          <TotalContainer>
             <Total>
                <span>Total (CAD)</span>
-               <span>${selectedOxygenGen.priceMSRP.toFixed(2)}</span>
+               <span>${selectedOxygenGen.totalPrice.toFixed(2)}</span>
             </Total>
          </TotalContainer>
 

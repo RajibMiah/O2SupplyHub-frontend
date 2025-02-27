@@ -1,9 +1,10 @@
 import useCustomerForm from '@hooks/useCustomerForm';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { submitCustomerInfo } from '@redux/thunks/customerInfo';
 import { setAuthentication, setProfile } from '@/redux/slices/authSlice';
+import Spinner from '@components/Spinner';
 
 import {
    Button,
@@ -23,7 +24,7 @@ import CustomerBilingInfo from '@/components/CustomerGroup/CustomerBilingInfo';
 const CustomerInformation = () => {
    const dispatch = useDispatch();
    const navigate = useNavigate();
-
+   const { loading } = useSelector((state) => state.customerInfo);
    const { formData, handleInputChange, handleToggleShipping, errors, validateForm } =
       useCustomerForm();
 
@@ -50,6 +51,10 @@ const CustomerInformation = () => {
    const handlePrevPage = () => {
       navigate(-1);
    };
+
+   if (loading) {
+      return <Spinner />;
+   }
 
    return (
       <MainContainer>

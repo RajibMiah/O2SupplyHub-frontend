@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setLoginModal, setSignupModal } from '@redux/slices/uiSlice';
 import { motion } from 'framer-motion';
+import { setCustomerContact } from '@redux/slices/customerInfoSlice';
+
+import Spinner from '@/components/Spinner';
 import {
    ModalOverlay,
    ModalContainer,
@@ -23,6 +26,8 @@ const LoginModal = () => {
    const dispatch = useDispatch();
    const navigate = useNavigate();
 
+   const { loading } = useSelector((state) => state.auth);
+
    const { loginModal } = useSelector((state) => state.ui);
    const [formData, setFormData] = useState({
       email: '',
@@ -39,12 +44,20 @@ const LoginModal = () => {
       }));
    };
 
-   const handleSubmit = (e) => {
+   const handleSubmit = async (e) => {
       e.preventDefault();
 
-      dispatch(loginUser(formData));
+      const { meta, payload } = await dispatch(loginUser(formData));
 
-      dispatch(setLoginModal(false)); // Close modal after submit
+      if (meta.requestStatus === 'fulfilled') {
+         const { user } = payload;
+         console.log('user---', user);
+         dispatch(setCustomerContact(user));
+      } else if (meta.requestStatus === 'rejected') {
+         alert('Something went wrong , login is not possible');
+      }
+
+      dispatch(setLoginModal(false));
    };
 
    const handleCancel = () => {
@@ -55,6 +68,10 @@ const LoginModal = () => {
       dispatch(setLoginModal(false));
       dispatch(setSignupModal(true));
    };
+
+   if (loading) {
+      return <Spinner />;
+   }
    return (
       loginModal && (
          <ModalOverlay>

@@ -1,50 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const useCustomerForm = () => {
-   const [formData, setFormData] = useState({
-      customer: {
-         details: '',
-         contractPerson: '',
-         referenceNumber: '',
-         preparedBy: '',
-         location: '',
-         contact: {
-            title: '',
-            name: '',
-            phone: '',
-            email: '',
-         },
-      },
-      billing: {
-         facilityName: '',
-         streetAddress: '',
-         city: '',
-         state: '',
-         zip: '',
-         country: '',
-         taxId: '',
-         receivingType: '',
-         receivingHours: '',
-         differentShipping: false, // ✅ Toggle This
-      },
-      shipping: {
-         facilityName: '',
-         streetAddress: '',
-         city: '',
-         state: '',
-         zip: '',
-         country: '',
-         taxId: '',
-         receivingType: '',
-         receivingHours: '',
-      },
-      instructions: {
-         constructionSite: false,
-         liftGate: false,
-         insideDelivery: false,
-         whiteGlove: false,
-      },
-   });
+   const { data } = useSelector((state) => state.customerInfo);
+
+   const [formData, setFormData] = useState(data);
 
    const [errors, setErrors] = useState({});
    // const [isFormFilled, setIsFormFilled] = useState(false);
@@ -73,6 +33,11 @@ const useCustomerForm = () => {
          [name]: '',
       }));
    };
+
+   useEffect(() => {
+      setFormData(data);
+      console.log(data);
+   }, [data]);
 
    // ✅ Toggle Different Shipping Address Checkbox
    const handleToggleShipping = () => {

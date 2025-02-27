@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { submitCustomerInfo } from '@redux/thunks/customerInfo';
+import { updateCustomerInfo } from '@redux/slices/customerInfoSlice';
 import { setAuthentication, setProfile } from '@/redux/slices/authSlice';
 import Spinner from '@components/Spinner';
 
@@ -41,6 +42,7 @@ const CustomerInformation = () => {
       if (meta.requestStatus === 'fulfilled') {
          dispatch(setProfile(customer));
          dispatch(setAuthentication(payload));
+         dispatch(updateCustomerInfo(formData));
          navigate('/checkout');
          alert(
             '✅ Form submission successful! ,if you were e new user Check your email. If not, check your spam folder.'

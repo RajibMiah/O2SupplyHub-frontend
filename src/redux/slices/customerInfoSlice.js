@@ -3,7 +3,50 @@ import { submitCustomerInfo } from '@redux/thunks/customerInfo';
 import { submitFinanceForm } from '@redux/thunks/financeForm';
 
 const initialState = {
-   data: null,
+   data: {
+      customer: {
+         details: '',
+         contractPerson: '',
+         referenceNumber: '',
+         preparedBy: '',
+         location: '',
+         contact: {
+            title: '',
+            name: '',
+            phone: '',
+            email: '',
+         },
+      },
+      billing: {
+         facilityName: '',
+         streetAddress: '',
+         city: '',
+         state: '',
+         zip: '',
+         country: '',
+         taxId: '',
+         receivingType: '',
+         receivingHours: '',
+         differentShipping: false, // ✅ Toggle This
+      },
+      shipping: {
+         facilityName: '',
+         streetAddress: '',
+         city: '',
+         state: '',
+         zip: '',
+         country: '',
+         taxId: '',
+         receivingType: '',
+         receivingHours: '',
+      },
+      instructions: {
+         constructionSite: false,
+         liftGate: false,
+         insideDelivery: false,
+         whiteGlove: false,
+      },
+   },
    loading: false,
    error: null,
 };
@@ -13,20 +56,16 @@ const customerSlice = createSlice({
    initialState,
    reducers: {
       updateCustomerInfo: (state, action) => {
-         const { field, value } = action.payload;
+         const updatedInfo = { ...state.data, ...action.payload };
 
-         const keys = field.split('.'); // Example: 'billing.city'
-         let current = state;
-
-         for (let i = 0; i < keys.length - 1; i++) {
-            current = current[keys[i]]; // Navigate through the state
-         }
-
-         current[keys[keys.length - 1]] = value; // Update the final key
+         state.data = updatedInfo;
       },
       updateFinanceInfo: (state, action) => {
          const { field, value } = action.payload;
          state.finance[field] = value;
+      },
+      setCustomerContact: (state, action) => {
+         state.data.customer.contact = action.payload;
       },
    },
    extraReducers: (builder) => {
@@ -58,5 +97,5 @@ const customerSlice = createSlice({
    },
 });
 
-export const { updateCustomerInfo, updateFinanceInfo } = customerSlice.actions;
+export const { updateCustomerInfo, updateFinanceInfo, setCustomerContact } = customerSlice.actions;
 export default customerSlice.reducer;

@@ -107,8 +107,10 @@ const selectionSlice = createSlice({
             (generator) => generator.partNumber === part_number
          );
 
-         state.selectedOxygenGen.totalPrice = selectedGenerator.priceMSRP;
-         state.selectedOxygenGen = selectedGenerator;
+         state.selectedOxygenGen = {
+            totalPrice: selectedGenerator.priceMSRP,
+            ...selectedGenerator,
+         };
       },
 
       setJetVentilatorUpdate: (state, action) => {

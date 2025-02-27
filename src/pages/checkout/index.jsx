@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaCreditCard } from 'react-icons/fa';
 import { IoArrowBack } from 'react-icons/io5';
-import CardComponent from '@/components/checkout/Card';
-import FinanceForm from '@/components/checkout/Finance';
-import InvoiceComponent from '@/components/checkout/Invoice';
+import CardComponent from '@/components/CheckoutGroup/Card';
+import FinanceForm from '@/components/CheckoutGroup/Finance';
+import InvoiceComponent from '@/components/CheckoutGroup/Invoice';
 
 const Container = styled.div`
    display: flex;

@@ -143,8 +143,8 @@ const Invoice = () => {
                <tr>
                   <td>{selectedOxygenGen.model}</td>
                   <td>{quantity}</td>
-                  <td>CAD ${selectedOxygenGen.priceMSRP.toFixed(2)}</td>
-                  <td>CAD ${selectedOxygenGen.totalPrice.toFixed(2)}</td>
+                  <td>CAD ${selectedOxygenGen.priceMSRP.toFixed(2) || null}</td>
+                  <td>CAD ${selectedOxygenGen.totalPrice.toFixed(2) || null}</td>
                </tr>
             </tbody>
          </Table>

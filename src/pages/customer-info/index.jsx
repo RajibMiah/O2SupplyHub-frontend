@@ -37,16 +37,14 @@ const CustomerInformation = () => {
 
       const { meta, payload } = await dispatch(submitCustomerInfo(formData));
 
-      console.log('meta ', meta, 'payload', payload);
-      navigate('/checkout');
-      // if (meta.requestStatus === 'fulfilled') {
-      //    dispatch(setProfile(customer));
-      //    dispatch(setAuthentication(payload));
+      if (meta.requestStatus === 'fulfilled') {
+         dispatch(setProfile(customer));
+         dispatch(setAuthentication(payload));
 
-      //    navigate('/checkout');
-      // } else if (meta.requestStatus === 'rejected') {
-      //    alert('something went wrong!!');
-      // }
+         navigate('/checkout');
+      } else if (meta.requestStatus === 'rejected') {
+         alert('something went wrong!!');
+      }
    };
 
    const handlePrevPage = () => {

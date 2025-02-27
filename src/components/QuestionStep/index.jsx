@@ -92,7 +92,7 @@ const QuestionStep = ({ questions }) => {
                         </>
                      ) : (
                         <>
-                           <NumberDisplay>{value} Qty</NumberDisplay>
+                           <NumberDisplay>{value}</NumberDisplay>
                            <Slider
                               value={value}
                               min={MIN_QTY}
@@ -132,10 +132,10 @@ const QuestionStep = ({ questions }) => {
 const NumberDisplay = styled.div`
    display: inline-block;
    background: white;
-   padding: 1rem 3rem;
+   padding: 1rem 4rem;
    border-radius: 10px;
    border: 1px solid #e5e7eb;
-   font-size: 3rem;
+   font-size: 31px;
    color: #14b8a6;
    font-weight: 600;
    margin-bottom: 1.5rem;

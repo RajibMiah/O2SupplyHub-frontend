@@ -140,9 +140,10 @@ export const QuestionContainer = styled.div`
 `;
 
 export const QuestionTitle = styled.h3`
+   text-align: center;
+   padding-top: 1rem;
+   padding-bottom: 2.5rem;
    color: #2c2c2e;
-   text-align: left;
-   padding: 14px;
 `;
 
 export const Options = styled.div`
@@ -361,20 +362,23 @@ export const ContentWrapper = styled.div`
    justify-content: space-around;
    padding-top: 2.5rem;
    align-items: center;
+   margin: 14px 3.5rem;
+   @media (min-width: 2200px) {
+      margin: 0;
+   }
 `;
 
 export const ImageWrapper = styled(ImageContainer)`
    text-align: center;
-   padding: 2rem 4rem;
+   padding: 2rem 2rem;
    background: #ffffff;
    border-radius: 12px;
    border: 2px solid #dfdfdf;
    margin: auto;
-   margin: auto;
-   // max-height: 30rem;
+   height: 40rem;
+   display: flex;
 
    img {
-      width: 30rem;
       display: block;
       margin: 0 auto;
    }

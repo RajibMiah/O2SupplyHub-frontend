@@ -41,8 +41,10 @@ const CustomerInformation = () => {
       if (meta.requestStatus === 'fulfilled') {
          dispatch(setProfile(customer));
          dispatch(setAuthentication(payload));
-
          navigate('/checkout');
+         alert(
+            '✅ Form submission successful! ,if you were e new user Check your email. If not, check your spam folder.'
+         );
       } else if (meta.requestStatus === 'rejected') {
          alert('something went wrong!!');
       }

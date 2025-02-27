@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setLoginModal, setSignupModal } from '@redux/slices/uiSlice';
+import { setLoginModal, setSignupModal, setForgetModel } from '@redux/slices/uiSlice';
 import { motion } from 'framer-motion';
 import { setCustomerContact } from '@redux/slices/customerInfoSlice';
 
@@ -51,7 +51,7 @@ const LoginModal = () => {
 
       if (meta.requestStatus === 'fulfilled') {
          const { user } = payload;
-         console.log('user---', user);
+
          dispatch(setCustomerContact(user));
       } else if (meta.requestStatus === 'rejected') {
          alert('Something went wrong , login is not possible');
@@ -67,6 +67,11 @@ const LoginModal = () => {
    const handleRedirect = () => {
       dispatch(setLoginModal(false));
       dispatch(setSignupModal(true));
+   };
+
+   const handleForgetModel = () => {
+      dispatch(setLoginModal(false));
+      dispatch(setForgetModel(true));
    };
 
    if (loading) {
@@ -120,12 +125,15 @@ const LoginModal = () => {
                            />
                            <span>Remember me</span>
                         </RememberContainer>
-                        <ForgetLink href="/forgot-password">Forgot Password?</ForgetLink>
+                        <ForgetLink onClick={handleForgetModel} href="/forgot-password">
+                           Forgot Password?
+                        </ForgetLink>
                      </CheckboxContainer>
 
                      <Button type="submit">Log in</Button>
                   </form>
-
+                  {/* {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+                  {error && <p style={{ color: 'red' }}>{error}</p>} */}
                   <FooterText>
                      Don&apos;t have an account?{' '}
                      <span style={{ cursor: 'pointer' }} onClick={handleRedirect}>

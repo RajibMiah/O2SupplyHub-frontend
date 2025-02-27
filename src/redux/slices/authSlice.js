@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { registerUser, loginUser } from '@redux/thunks/auth';
+import { registerUser, loginUser, forgetPassword } from '@redux/thunks/auth';
 
 // Authentication slice
 const authSlice = createSlice({
@@ -10,6 +10,7 @@ const authSlice = createSlice({
       isAuthenticated: !!localStorage.getItem('authToken'),
       loading: false,
       error: null,
+      successMessage: null,
    },
    reducers: {
       logout: (state) => {
@@ -60,6 +61,20 @@ const authSlice = createSlice({
             localStorage.setItem('authToken', action.payload.token); // Save token
          })
          .addCase(loginUser.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+         })
+         // 🔹 Forget Password
+         .addCase(forgetPassword.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+            state.successMessage = null;
+         })
+         .addCase(forgetPassword.fulfilled, (state, action) => {
+            state.loading = false;
+            state.successMessage = action.payload.message; // Success message from backend
+         })
+         .addCase(forgetPassword.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload;
          });

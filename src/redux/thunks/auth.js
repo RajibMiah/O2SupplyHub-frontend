@@ -38,3 +38,16 @@ export const loginUser = createAsyncThunk('auth/login', async (userData, { rejec
       return rejectWithValue(error.response?.data || 'Login failed');
    }
 });
+
+export const forgetPassword = createAsyncThunk(
+   'auth/forget-password',
+   async (formData, { rejectWithValue }) => {
+      try {
+         const response = await axios.post(`${API_URL}/auth/generate-password`, formData);
+
+         return response.data;
+      } catch (error) {
+         return rejectWithValue(error.response?.data || 'Something went wrong');
+      }
+   }
+);

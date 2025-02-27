@@ -7,6 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import ThemeProviderWrapper from '@/context/ThemeContext';
 import LoginModal from '@/components/LoginModel';
 import SignupModal from '@/components/SignupModel';
+import PasswordForgetModel from '@/components/PasswordForgetModel';
 
 import App from './App';
 import Header from '@components/Header';
@@ -21,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                   <App />
                   <LoginModal />
                   <SignupModal />
+                  <PasswordForgetModel />
                </BrowserRouter>
             </ThemeProviderWrapper>
          </PersistGate>

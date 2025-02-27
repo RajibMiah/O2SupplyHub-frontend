@@ -101,7 +101,7 @@ export const ContentContainer = styled.div`
    display: flex;
    flex-direction: column;
    margin: 3.5rem auto;
-   width: 100%;
+   width: 90%;
    @media (min-width: 2200px) {
       width: 55%;
    }
@@ -110,12 +110,27 @@ export const ContentContainer = styled.div`
 export const Layout = styled.div`
    display: flex;
    justify-content: space-around;
+
    @media (max-width: 768px) {
       flex-direction: column;
    }
+
+   // .slick-list {
+   //    display: flex !important;
+   //    width: 100% !important;
+   // }
+   .slick-slider {
+      width: 26%;
+   }
 `;
 
-export const ImageContainer = styled.div``;
+export const ImageContainer = styled.div`
+   img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+   }
+`;
 
 export const MotionImgContainer = styled(motion.img)`
    width: '100%';
@@ -362,7 +377,8 @@ export const ContentWrapper = styled.div`
    justify-content: space-around;
    padding-top: 2.5rem;
    align-items: center;
-   margin: 14px 3.5rem;
+   //margin: 14px 3.5rem;
+
    @media (min-width: 2200px) {
       margin: 0;
    }

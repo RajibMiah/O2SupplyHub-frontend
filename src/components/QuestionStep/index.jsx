@@ -13,13 +13,31 @@ import {
    Layout,
 } from '@styles/selectionStyle';
 
-import Slider from '@/components/Slider';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+import RangeSliderSelect from '@/components/Slider';
+
 import image1 from '@assets/images/image1.jpg';
+import image2 from '@assets/images/image2.jpg';
+import image3 from '@assets/images/image3.jpg';
+import image4 from '@assets/images/image4.jpg';
 
 const MIN_QTY = 0;
 const MAX_QTY = 10;
 const MIN_FLOW_RATE = 1;
 const MAX_FLOW_RATE = 40;
+
+const settings = {
+   dots: true,
+   infinite: true,
+   speed: 500,
+   slidesToShow: 1,
+   slidesToScroll: 1,
+   autoplay: true,
+   autoplaySpeed: 3000,
+};
 
 const QuestionStep = ({ questions }) => {
    const {
@@ -40,9 +58,20 @@ const QuestionStep = ({ questions }) => {
    return (
       <>
          <Layout>
-            <ImageContainer>
-               <img src={image1} alt="Oxygen Concentrator" />
-            </ImageContainer>
+            <Slider {...settings}>
+               <ImageContainer>
+                  <img src={image1} alt="Oxygen Concentrator" />
+               </ImageContainer>
+               <ImageContainer>
+                  <img src={image2} alt="Medical Equipment" />
+               </ImageContainer>
+               <ImageContainer>
+                  <img src={image3} alt="Medical Equipment" />
+               </ImageContainer>
+               <ImageContainer>
+                  <img src={image4} alt="Medical Equipment" />
+               </ImageContainer>
+            </Slider>
 
             <QuestionContainer>
                <AnimatePresence mode="wait">
@@ -76,7 +105,7 @@ const QuestionStep = ({ questions }) => {
                            {isVentilatorSelected && (
                               <>
                                  <NumberDisplay>{value} LPM</NumberDisplay>
-                                 <Slider
+                                 <RangeSliderSelect
                                     value={value}
                                     min={MIN_FLOW_RATE}
                                     max={MAX_FLOW_RATE}
@@ -93,7 +122,7 @@ const QuestionStep = ({ questions }) => {
                      ) : (
                         <>
                            <NumberDisplay>{value}</NumberDisplay>
-                           <Slider
+                           <RangeSliderSelect
                               value={value}
                               min={MIN_QTY}
                               max={MAX_QTY}

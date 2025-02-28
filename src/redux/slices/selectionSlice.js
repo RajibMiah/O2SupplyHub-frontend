@@ -62,11 +62,11 @@ const oxygenGenerators = [
 
 const getPartNumber = (systemFlow) => {
    if (systemFlow <= 10) {
-      return 'RA2801OC1V6506'; // Aura® 10 Nano
-   } else if (systemFlow <= 20) {
       return 'RA2801OC4V6278'; // Aura® 10
-   } else if (systemFlow <= 40) {
+   } else if (systemFlow <= 20) {
       return 'RA2801OC4V6200'; // Aura® 20
+   } else if (systemFlow <= 40) {
+      return 'RA2801OC8V6458'; // Aura® 40
    } else {
       return 'RA2801OC8V6430'; // Aura® 80
    }

@@ -4,7 +4,39 @@ const url = import.meta.env.VITE_API_URL;
 
 export const submitFinanceForm = createAsyncThunk(
    'finance/submitFinanceForm',
-   async (financeData, { rejectWithValue }) => {
+   async (formData, { rejectWithValue }) => {
+      // Build the owners array from the individual fields
+      const owners = [];
+
+      if (formData.owner1Name) {
+         owners.push({
+            name: formData.owner1Name,
+            ssn: formData.owner1SSN,
+            email: formData.owner1Email,
+            signature: formData.owner1Signature,
+         });
+      }
+
+      if (formData.owner2Name) {
+         owners.push({
+            name: formData.owner2Name,
+            ssn: formData.owner2SSN,
+            email: formData.owner2Email,
+            signature: formData.owner2Signature,
+         });
+      }
+
+      // Build the final form data object
+      const submissionData = {
+         businessName: formData.businessName,
+         taxId: formData.taxId,
+         address: formData.address,
+         cityStateZip: formData.cityStateZip, // you might want to parse this on the backend
+         phone: formData.phone,
+         email: formData.email,
+         owners, // now grouped as an array of owner objects
+      };
+
       try {
          // Retrieve token from localStorage
          const token = localStorage.getItem('authToken');
@@ -15,7 +47,7 @@ export const submitFinanceForm = createAsyncThunk(
                'Content-Type': 'application/json',
                Authorization: `Bearer ${token}`, // Attach token here
             },
-            body: JSON.stringify(financeData),
+            body: JSON.stringify(submissionData),
          });
 
          console.log('🔍 Response Status:', response.status);

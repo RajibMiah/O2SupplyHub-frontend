@@ -23,7 +23,7 @@ const useQuestionLogic = (questions) => {
    const currentQuestion = dummyQuestions[step];
 
    const isJetVentilator = currentQuestion?.question === JET_VENTILATOR;
-   const [isJetVentilatorSelected] = useState(isVentilatorSelected);
+   const [isJetVentilatorSelected, setIsJetVentilatorSelected] = useState(isVentilatorSelected);
 
    const [value, setValue] = useState(
       isJetVentilator && isJetVentilatorSelected
@@ -34,42 +34,49 @@ const useQuestionLogic = (questions) => {
    );
 
    useEffect(() => {
-      if (isJetVentilator && isJetVentilatorSelected) {
-         setValue(
-            selectedOptions[currentQuestion?.id]?.flow_rate ??
-               currentQuestion?.flow_rate ??
-               MIN_FLOW_RATE
-         );
-      } else if (isJetVentilator) {
-         setValue(currentQuestion?.flow_rate);
-      } else {
-         setValue(selectedOptions[currentQuestion?.id]?.qty ?? currentQuestion?.qty ?? MIN_QTY);
-      }
-   }, [
-      step,
-      selectedOptions,
-      dummyQuestions,
-      currentQuestion?.flow_rate,
-      currentQuestion?.id,
-      currentQuestion?.qty,
-      isJetVentilator,
-      isJetVentilatorSelected,
-      isVentilatorSelected,
-   ]);
+      setIsJetVentilatorSelected(isVentilatorSelected);
+   }, [isVentilatorSelected]);
+
+   // useEffect(() => {
+   //    if (isJetVentilator && isJetVentilatorSelected) {
+   //       console.log('1====');
+   //       setValue(
+   //          selectedOptions[currentQuestion?.id]?.flow_rate ??
+   //             currentQuestion?.flow_rate ??
+   //             MIN_FLOW_RATE
+   //       );
+   //    } else if (isJetVentilator) {
+   //       console.log('else if - 2');
+   //       setValue(currentQuestion?.flow_rate);
+   //    } else {
+   //       console.log('else 3');
+   //       setValue(selectedOptions[currentQuestion?.id]?.qty ?? currentQuestion?.qty ?? MIN_QTY);
+   //    }
+   // }, [
+   //    step,
+   //    selectedOptions,
+   //    dummyQuestions,
+   //    currentQuestion?.flow_rate,
+   //    currentQuestion?.id,
+   //    currentQuestion?.qty,
+   //    isJetVentilator,
+   //    isJetVentilatorSelected,
+   //    isVentilatorSelected,
+   // ]);
 
    const updateDummyQuestions = (id, updatedData) => {
       setDummyQuestions((prev) =>
          prev.map((question) => (question.id === id ? { ...question, ...updatedData } : question))
       );
 
-      dispatch(
-         setSelectedOptions({
-            [id]: {
-               ...selectedOptions[id],
-               ...updatedData,
-            },
-         })
-      );
+      // dispatch(
+      //    setSelectedOptions({
+      //       [id]: {
+      //          ...selectedOptions[id],
+      //          ...updatedData,
+      //       },
+      //    })
+      // );
    };
 
    const handleChange = (e) => {
@@ -77,21 +84,26 @@ const useQuestionLogic = (questions) => {
       setValue(newValue);
 
       const updatedData =
-         isJetVentilator && isJetVentilatorSelected ? { flow_rate: newValue } : { qty: newValue };
+         isJetVentilator && isVentilatorSelected
+            ? { ...questions[3], flow_rate: newValue }
+            : { qty: newValue };
       console.log('question', currentQuestion);
+
+      console.log('update data', updatedData);
+      console.log('cureent ventilator ', isJetVentilator, ': ', isVentilatorSelected);
       updateDummyQuestions(currentQuestion.id, updatedData);
    };
 
    const handleIncrement = () => {
       setValue((prevValue) => {
          const newValue =
-            isJetVentilator && isJetVentilatorSelected
+            isJetVentilator && isVentilatorSelected
                ? Math.min(prevValue + 1, MAX_FLOW_RATE)
                : Math.min(prevValue + 1, MAX_QTY);
 
          updateDummyQuestions(
             currentQuestion.id,
-            isJetVentilator && isJetVentilatorSelected ? { flow_rate: newValue } : { qty: newValue }
+            isJetVentilator && isVentilatorSelected ? { flow_rate: newValue } : { qty: newValue }
          );
          return newValue;
       });
@@ -100,13 +112,13 @@ const useQuestionLogic = (questions) => {
    const handleDecrement = () => {
       setValue((prevValue) => {
          const newValue =
-            isJetVentilator && isJetVentilatorSelected
+            isJetVentilator && isVentilatorSelected
                ? Math.max(prevValue - 1, MIN_FLOW_RATE)
                : Math.max(prevValue - 1, MIN_QTY);
 
          updateDummyQuestions(
             currentQuestion.id,
-            isJetVentilator && isJetVentilatorSelected ? { flow_rate: newValue } : { qty: newValue }
+            isJetVentilator && isVentilatorSelected ? { flow_rate: newValue } : { qty: newValue }
          );
          return newValue;
       });

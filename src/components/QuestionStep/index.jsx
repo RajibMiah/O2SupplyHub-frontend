@@ -25,9 +25,9 @@ import image3 from '@assets/images/image3.jpg';
 import image4 from '@assets/images/image4.jpg';
 
 const MIN_QTY = 0;
-const MAX_QTY = 10;
+const MAX_QTY = 20;
 const MIN_FLOW_RATE = 1;
-const MAX_FLOW_RATE = 40;
+const MAX_FLOW_RATE = 60;
 
 const settings = {
    dots: true,

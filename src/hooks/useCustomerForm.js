@@ -9,25 +9,29 @@ const useCustomerForm = () => {
    const [errors, setErrors] = useState({});
    // const [isFormFilled, setIsFormFilled] = useState(false);
 
-   // ✅ Handle Input Change & Remove Errors
    const handleInputChange = (e) => {
       const { name, value, type, checked } = e.target;
       const newValue = type === 'checkbox' || type === 'radio' ? checked : value;
 
       setFormData((prevData) => {
-         const keys = name.split('.'); // Splitting keys like billing.city
+         const keys = name.split('.'); // e.g., "billing.city"
+         // Make a shallow copy of the root object
          const updatedData = { ...prevData };
-
          let current = updatedData;
+
+         // Loop over the keys, cloning each nested object along the path
          for (let i = 0; i < keys.length - 1; i++) {
+            // Clone the nested object to ensure we don't mutate the original
+            current[keys[i]] = { ...current[keys[i]] };
             current = current[keys[i]];
          }
+         // Set the new value on the final key
          current[keys[keys.length - 1]] = newValue;
 
-         return { ...updatedData };
+         return updatedData;
       });
 
-      // ✅ Remove error message when user types
+      // Remove error message when user types
       setErrors((prevErrors) => ({
          ...prevErrors,
          [name]: '',
@@ -35,7 +39,7 @@ const useCustomerForm = () => {
    };
 
    useEffect(() => {
-      setFormData(data);
+      setFormData((prevData) => ({ ...prevData, ...data }));
       console.log(data);
    }, [data]);
 

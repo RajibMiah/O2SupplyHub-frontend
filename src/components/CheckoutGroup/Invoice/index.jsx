@@ -162,10 +162,10 @@ const Invoice = () => {
             {/* Company Info */}
             <ContactInfo>
                <img src={CompanyLogo} alt="ON2 Solutions Logo" />
-               <h3>ON2 Solutions</h3>
+               <h3>ON2 Systems</h3>
                <p>Address / Contact Info</p>
                <p>
-                  <a href="mailto:sales@on2solutions.ca">sales@on2solutions.ca</a>
+                  <a href="mailto:sales@on2solutions.com">sales@on2systems.ca</a>
                </p>
                <p>British Columbia</p>
                <p>1-20133 102 Avenue, Langley, BC. V1M 4B4</p>

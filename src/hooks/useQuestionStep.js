@@ -10,7 +10,7 @@ import {
 const MIN_QTY = 0;
 const MAX_QTY = 10;
 const MIN_FLOW_RATE = 1;
-const MAX_FLOW_RATE = 40;
+const MAX_FLOW_RATE = 60;
 
 const JET_VENTILATOR = 'Do you use ventilator?';
 
@@ -25,58 +25,56 @@ const useQuestionLogic = (questions) => {
    const isJetVentilator = currentQuestion?.question === JET_VENTILATOR;
    const [isJetVentilatorSelected, setIsJetVentilatorSelected] = useState(isVentilatorSelected);
 
-   const [value, setValue] = useState(
-      isJetVentilator && isJetVentilatorSelected
-         ? selectedOptions[currentQuestion?.id]?.flow_rate ??
-              currentQuestion?.flow_rate ??
-              MIN_FLOW_RATE
-         : selectedOptions[currentQuestion?.id]?.qty ?? currentQuestion?.qty ?? MIN_QTY
-   );
+   // Helper function to get the initial value for the question.
+   const getInitialValue = () => {
+      if (isJetVentilator) {
+         if (isJetVentilatorSelected) {
+            return (
+               selectedOptions[currentQuestion?.id]?.flow_rate ??
+               currentQuestion?.flow_rate ??
+               MIN_FLOW_RATE
+            );
+         }
+         return currentQuestion?.flow_rate ?? MIN_FLOW_RATE;
+      }
+      return selectedOptions[currentQuestion?.id]?.qty ?? currentQuestion?.qty ?? MIN_QTY;
+   };
 
+   const [value, setValue] = useState(getInitialValue());
+
+   // Sync local ventilator selection with Redux
    useEffect(() => {
       setIsJetVentilatorSelected(isVentilatorSelected);
    }, [isVentilatorSelected]);
 
-   // useEffect(() => {
-   //    if (isJetVentilator && isJetVentilatorSelected) {
-   //       console.log('1====');
-   //       setValue(
-   //          selectedOptions[currentQuestion?.id]?.flow_rate ??
-   //             currentQuestion?.flow_rate ??
-   //             MIN_FLOW_RATE
-   //       );
-   //    } else if (isJetVentilator) {
-   //       console.log('else if - 2');
-   //       setValue(currentQuestion?.flow_rate);
-   //    } else {
-   //       console.log('else 3');
-   //       setValue(selectedOptions[currentQuestion?.id]?.qty ?? currentQuestion?.qty ?? MIN_QTY);
-   //    }
-   // }, [
-   //    step,
-   //    selectedOptions,
-   //    dummyQuestions,
-   //    currentQuestion?.flow_rate,
-   //    currentQuestion?.id,
-   //    currentQuestion?.qty,
-   //    isJetVentilator,
-   //    isJetVentilatorSelected,
-   //    isVentilatorSelected,
-   // ]);
+   // Update the value when navigating between questions or when selectedOptions change.
+   useEffect(() => {
+      setValue(getInitialValue());
+   }, [
+      step,
+      selectedOptions,
+      currentQuestion?.id,
+      currentQuestion?.flow_rate,
+      currentQuestion?.qty,
+      isJetVentilator,
+      isJetVentilatorSelected,
+   ]);
 
+   // Update dummyQuestions and Redux store simultaneously.
    const updateDummyQuestions = (id, updatedData) => {
       setDummyQuestions((prev) =>
          prev.map((question) => (question.id === id ? { ...question, ...updatedData } : question))
       );
 
-      // dispatch(
-      //    setSelectedOptions({
-      //       [id]: {
-      //          ...selectedOptions[id],
-      //          ...updatedData,
-      //       },
-      //    })
-      // );
+      dispatch(
+         setSelectedOptions({
+            ...selectedOptions,
+            [id]: {
+               ...(selectedOptions[id] || {}),
+               ...updatedData,
+            },
+         })
+      );
    };
 
    const handleChange = (e) => {
@@ -84,13 +82,8 @@ const useQuestionLogic = (questions) => {
       setValue(newValue);
 
       const updatedData =
-         isJetVentilator && isVentilatorSelected
-            ? { ...questions[3], flow_rate: newValue }
-            : { qty: newValue };
-      console.log('question', currentQuestion);
+         isJetVentilator && isVentilatorSelected ? { flow_rate: newValue } : { qty: newValue };
 
-      console.log('update data', updatedData);
-      console.log('cureent ventilator ', isJetVentilator, ': ', isVentilatorSelected);
       updateDummyQuestions(currentQuestion.id, updatedData);
    };
 
@@ -126,22 +119,8 @@ const useQuestionLogic = (questions) => {
 
    const handleJetVentilatorSelection = (option) => {
       const isSelected = option === 'Yes';
-      console.log('is selected', isSelected);
       dispatch(setJetVentilatorUpdate(isSelected));
-
-      // // Define the Jet Ventilator question object
-      // const JET_VENTILATOR = {
-      //    id: 3,
-      //    question: 'Do you use ventilator?',
-      //    qty: 1,
-      //    flow_rate: 25,
-      //    diversity_factor: 100,
-      // };
-      // setDummyQuestions((prevQuestions) => {
-      //    return isSelected
-      //       ? [...prevQuestions.filter((q) => q.id !== JET_VENTILATOR.id), JET_VENTILATOR] // Add if not exists
-      //       : prevQuestions.filter((q) => q.id !== JET_VENTILATOR.id); // Remove if exists
-      // });
+      // If needed, you can also update the current question immediately here.
    };
 
    const handleNavigation = (newStep) => {
@@ -161,10 +140,9 @@ const useQuestionLogic = (questions) => {
          };
       });
 
-      // Remove Jet Ventilator question if isJetVentilatorSelected is false
-      console.log('is jet ventilator selected', isVentilatorSelected);
+      // Remove the ventilator question if it was not selected
       if (!isVentilatorSelected) {
-         finalData = finalData.filter((question) => question.id !== 3); // Assuming 3 is JET_VENTILATOR ID
+         finalData = finalData.filter((question) => question.id !== 3);
       }
 
       dispatch(setSelectedOptions(finalData));

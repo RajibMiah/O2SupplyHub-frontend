@@ -172,23 +172,23 @@ const FinanceForm = () => {
             <SignatureBox>
                <SignatureInput
                   type="text"
-                  placeholder="Sign here..."
+                  placeholder="Enter your name"
                   name="owner1Signature"
                   value={formData.owner1Signature}
                   onChange={handleInputChange}
                />
-               <span>Type you full name</span>
+               <span>Signature</span>
                {errors.owner1Signature && <ErrorMessage>{errors.owner1Signature}</ErrorMessage>}
             </SignatureBox>
             <SignatureBox>
                <SignatureInput
                   type="text"
-                  placeholder="Sign here..."
+                  placeholder="Enter your name"
                   name="owner2Signature"
                   value={formData.owner2Signature}
                   onChange={handleInputChange}
                />
-               <span>Type you full name</span>
+               <span>Signature</span>
                {errors.owner2Signature && <ErrorMessage>{errors.owner2Signature}</ErrorMessage>}
             </SignatureBox>
          </SignatureSection>
@@ -224,20 +224,20 @@ const FinanceForm = () => {
             enter into a binding contract), because all or part of the applicant&apos;s income
             derives from any public assistance program, or because the applicant has, in good faith,
             exercised any right under the Consumer Credit Protection Act. The federal agency that
-            administers our compliance with this law is the Burea of Consumer Financial Protection,
-            1700 G Street NW, Wsahington, DC 20006.
+            administers our compliance with this law is the Bureau of Consumer Financial Protection,
+            1700 G Street NW, Washington, DC 20006.
          </Disclaimer>
          <ContactSection>
             <ContactInfo>
                <img src={CompanyLogo} alt="ON2 Solutions Logo" />
-               <h3>ON2 Solutions</h3>
+               <h3>ON2 Systems</h3>
                <p>Address / Contact Info</p>
                <p>7901 4th St N Suite 2319</p>
                <p>St. Petersburg, FL 33702</p>
                <p>Phone: 850-988-5948</p>
                <p>Toll Free: 1-866-579-4921</p>
                <p>
-                  Website: <a href="https://www.on2solutions.ca">www.on2solutions.ca</a>
+                  Website: <a href="https://www.on2systems.ca">www.on2systems.ca</a>
                </p>
             </ContactInfo>
 
@@ -254,9 +254,7 @@ const FinanceForm = () => {
          </ContactSection>
 
          <SubmitButtonContainer>
-            <SubmitButton on onClick={handleSubmit}>
-               Submit
-            </SubmitButton>
+            <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
          </SubmitButtonContainer>
       </Container>
    );

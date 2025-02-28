@@ -44,7 +44,7 @@ const ResultPage = () => {
    return (
       <ResultContainer>
          <HeaderSection>
-            <h2>Recommended Oxygen Concentrator</h2>
+            <h2>Recommended Oxygen Plant</h2>
          </HeaderSection>
 
          <ContentWrapper>
@@ -58,7 +58,7 @@ const ResultPage = () => {
                      <h3>
                         <strong>{selectedOxygenGen.model}</strong>
                      </h3>
-                     <RetailPrice>CAD ${selectedOxygenGen.priceMSRP.toFixed(2)}</RetailPrice>
+                     <RetailPrice>CAD ${selectedOxygenGen.totalPrice.toFixed(2)}</RetailPrice>
                   </TitleWrapper>
 
                   <OrText>Or</OrText>
@@ -69,7 +69,7 @@ const ResultPage = () => {
                         <span>CAD ${selectedOxygenGen.leaseMonthly.toFixed(2)}</span>
                      </LeasePrice>
                      <LeasePrice>
-                        <span>5 Year weekly Lease Plan</span>
+                        <span>5 Year Weekly Lease Plan</span>
                         <span>CAD ${selectedOxygenGen.leaseWeekly.toFixed(2)}</span>
                      </LeasePrice>
                   </PriceWrapper>
@@ -114,7 +114,7 @@ const ResultPage = () => {
                <ButtonContainer>
                   <Button onClick={() => dispatch(setResultPage(false))}>Prev</Button>
                   <Button primary onClick={handlePurchase}>
-                     Purchase Now
+                     Proceed to payment
                   </Button>
                </ButtonContainer>
             </DetailsWrapper>
